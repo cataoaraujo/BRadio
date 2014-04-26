@@ -23,7 +23,7 @@ public class BRadio extends Application {
 
     @Override
     public void start(Stage stage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("FXML.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("Login.fxml"));
 
         Undecorator undecorator = new Undecorator(stage, (Region) root);
         undecorator.getStylesheets().add("skin/undecorator.css");

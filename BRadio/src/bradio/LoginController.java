@@ -6,6 +6,9 @@
 
 package bradio;
 
+import Model.Musica;
+import Model.Player;
+import java.io.File;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.fxml.Initializable;
@@ -22,7 +25,9 @@ public class LoginController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
+//        Player<Musica> player = new Player<>();
+//        player.setArquivo(new File("E:\\Musicas\\True\\Link Park - Leave Out All The Rest.ogg"));
+//        player.play();
     }    
     
 }

@@ -10,9 +10,9 @@
 <?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane id="AnchorPane" prefHeight="300.0" prefWidth="500.0" styleClass="" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="bradio.LoginController">
+<AnchorPane id="AnchorPane" prefHeight="256.0" prefWidth="500.0" styleClass="" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="bradio.LoginController">
   <children>
-    <VBox layoutX="0.0" layoutY="0.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="300.0" prefWidth="500.0" style="-fx-background-color: #000;">
+    <VBox layoutX="0.0" layoutY="0.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="256.0" prefWidth="500.0" style="-fx-background-color: #000;">
       <children>
         <HBox id="HBox" alignment="CENTER_LEFT" spacing="10.0">
           <children>
@@ -23,7 +23,7 @@
             </ImageView>
             <VBox id="VBox" alignment="CENTER" spacing="5.0">
               <children>
-                <ComboBox prefHeight="21.0" prefWidth="295.0" promptText="Escolher Programa">
+                <ComboBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="21.0" prefWidth="295.0" promptText="Escolher Programa">
                   <items>
                     <FXCollections fx:factory="observableArrayList">
                       <String fx:value="Item 1" />
@@ -40,7 +40,23 @@
             <Insets right="5.0" />
           </padding>
         </HBox>
+        <HBox alignment="CENTER" prefHeight="127.45095825195312" prefWidth="500.0" spacing="10.0">
+          <children>
+            <Button mnemonicParsing="false" text="Novo Programa" />
+            <Button mnemonicParsing="false" text="Novo Radialista" />
+            <Button mnemonicParsing="false" text="Novo Cliente" />
+            <Button mnemonicParsing="false" text="Nova Propaganda" />
+          </children>
+        </HBox>
+        <HBox alignment="CENTER" prefHeight="21.0" prefWidth="500.0">
+          <children>
+            <Button mnemonicParsing="false" text="Opções" />
+          </children>
+        </HBox>
       </children>
+      <padding>
+        <Insets bottom="10.0" />
+      </padding>
     </VBox>
   </children>
   <stylesheets>
