@@ -7,6 +7,9 @@
 package Model.DAO;
 import Model.*;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.util.ArrayList;
 
 import java.util.Collection;
 
@@ -37,7 +40,22 @@ public class ClienteDAO extends GenericDAO<Cliente>{
 
     @Override
     public Collection<Cliente> getAll() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        String sqlGetAll = "SELECT * FROM TB_CLIENTE";
+        Collection<Cliente> clientes = new ArrayList<>();
+        try {
+            PreparedStatement pStatement = conn.prepareStatement(sqlGetAll);
+            ResultSet rs = pStatement.executeQuery();
+            while (rs.next()) {
+                Cliente cliente = new Cliente();
+                cliente.setCodigo(rs.getInt("CLI_CODIGO"));
+                System.out.println(rs.getString("CLI_NOMEFANTASIA"));
+                clientes.add(cliente);
+            }
+        } catch (Exception e) {
+            //who cares?
+            //GeradorLog.getLoggerBanco().severe(e.toString());
+        }
+        return clientes;
     }
     
 }
