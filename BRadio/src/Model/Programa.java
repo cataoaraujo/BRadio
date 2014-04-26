@@ -6,6 +6,7 @@
 
 package Model;
 
+import java.sql.Time;
 import java.util.ArrayList;
 
 /**
@@ -15,6 +16,8 @@ import java.util.ArrayList;
 public class Programa {
     private int codigo;
     private String nome;
+    private Time horarioInicio;
+    private Time horarioFim;
     private ArrayList<Radialista> radialistas;
 
     public Programa() {
@@ -36,6 +39,22 @@ public class Programa {
         this.nome = nome;
     }
 
+    public Time getHorarioInicio() {
+        return horarioInicio;
+    }
+
+    public void setHoraInicio(Time horarioInicio) {
+        this.horarioInicio = horarioInicio;
+    }
+
+    public Time getHorarioFim() {
+        return horarioFim;
+    }
+
+    public void setHorarioFim(Time horarioFim) {
+        this.horarioFim = horarioFim;
+    }
+    
     public ArrayList<Radialista> getRadialistas() {
         return radialistas;
     }

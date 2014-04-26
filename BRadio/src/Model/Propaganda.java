@@ -18,8 +18,7 @@ import java.util.Date;
 public class Propaganda {
     private int codigo;
     private String nome;
-    private Date inicio;
-    private Date fim;
+    private Date data;
     private File arquivo;
     private Cliente cliente;
     private Time horarios;
@@ -49,20 +48,12 @@ public class Propaganda {
         this.nome = nome;
     }
 
-    public Date getInicio() {
-        return inicio;
+    public Date getData() {
+        return data;
     }
 
-    public void setInicio(Date inicio) {
-        this.inicio = inicio;
-    }
-
-    public Date getFim() {
-        return fim;
-    }
-
-    public void setFim(Date fim) {
-        this.fim = fim;
+    public void setData(Date data) {
+        this.data = data;
     }
 
     public File getArquivo() {
