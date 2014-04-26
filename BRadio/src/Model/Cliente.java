@@ -19,6 +19,7 @@ public class Cliente {
     private String CNPJ;
     private Date dataCadastro;
     private String telefone;
+    private String endereco;
 
     public Cliente() {
     }
@@ -69,6 +70,14 @@ public class Cliente {
 
     public void setTelefone(String telefone) {
         this.telefone = telefone;
+    }
+
+    public String getEndereco() {
+        return endereco;
+    }
+
+    public void setEndereco(String endereco) {
+        this.endereco = endereco;
     }
     
     

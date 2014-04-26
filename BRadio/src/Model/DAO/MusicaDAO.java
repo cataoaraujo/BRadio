@@ -7,7 +7,11 @@
 package Model.DAO;
 
 import Model.Musica;
+import java.io.File;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.util.ArrayList;
 import java.util.Collection;
 
 /**
@@ -22,22 +26,87 @@ public class MusicaDAO extends GenericDAO<Musica>{
 
     @Override
     public boolean insert(Musica o) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        String sqlInsert = "INSERT INTO TB_MUSICA(MUS_TITULO, MUS_ARTISTA, MUS_GENERO, MUS_ALBUM, MUS_ARQUIVO) VALUES (?,?,?,?,?)";
+        try {
+            PreparedStatement pStatement = conn.prepareStatement(sqlInsert, java.sql.Statement.RETURN_GENERATED_KEYS);
+            pStatement.setString(1, o.getTitulo());
+            pStatement.setString(2, o.getArtista());
+            pStatement.setString(3, o.getGenero());
+            pStatement.setString(4, o.getAlbum());
+            pStatement.setString(5, o.getArquivo().getAbsolutePath());
+            
+            if (pStatement.executeUpdate() > 0) {
+                ResultSet rs = pStatement.getGeneratedKeys();
+                if (rs.next()) {
+                    o.setCodigo(rs.getInt(1));
+                }
+                return true;
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return false;
     }
 
     @Override
     public boolean update(Musica o) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        String sqlInsert = "UPDATE TB_MUSICA SET MUS_TITULO=?, MUS_ARTISTA=?, MUS_GENERO=?, MUS_ALBUM=?, MUS_ARQUIVO=? WHERE MUS_CODIGO = "+o.getCodigo();
+        try {
+            PreparedStatement pStatement = conn.prepareStatement(sqlInsert);
+            pStatement.setString(1, o.getTitulo());
+            pStatement.setString(2, o.getArtista());
+            pStatement.setString(3, o.getGenero());
+            pStatement.setString(4, o.getAlbum());
+            pStatement.setString(5, o.getArquivo().getAbsolutePath());
+            
+            if (pStatement.executeUpdate() > 0) {
+                return true;
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return false;
     }
 
     @Override
     public boolean delete(Musica o) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        String sqlInsert = "DELETE FROM TB_MUSICA WHERE MUS_CODIGO = ?";
+        try {
+            PreparedStatement pStatement = conn.prepareStatement(sqlInsert);     
+            pStatement.setInt(1, o.getCodigo());
+            if (pStatement.executeUpdate() > 0) {
+                return true;
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return false;
     }
 
     @Override
     public Collection<Musica> getAll() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        String sqlGetAll = "SELECT * FROM TB_MUSICA ORDER BY MUS_TITULO";
+        Collection<Musica> musicas = new ArrayList<>();
+        try {
+            PreparedStatement pStatement = conn.prepareStatement(sqlGetAll);
+            ResultSet rs = pStatement.executeQuery();
+            while (rs.next()) {
+                Musica musica = new Musica();
+                musica.setCodigo(rs.getInt("MUS_CODIGO"));
+                musica.setTitulo(rs.getString("MUS_TITULO"));
+                musica.setGenero(rs.getString("MUS_GENERO"));
+                musica.setArtista(rs.getString("MUS_ARTISTA"));
+                musica.setAlbum(rs.getString("MUS_ALBUM"));
+                musica.setArquivo(new File(rs.getString("MUS_ARQUIVO")));
+                musicas.add(musica);
+            }
+        } catch (Exception e) {
+            //who cares?
+        }
+        return musicas;
     }
     
 }
