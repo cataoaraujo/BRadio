@@ -6,7 +6,10 @@
 
 package Model;
 
+import java.io.File;
 import java.sql.Time;
+import java.util.ArrayList;
+import java.util.Date;
 
 /**
  *
@@ -15,14 +18,18 @@ import java.sql.Time;
 public class Propaganda {
     private int codigo;
     private String nome;
-    private Time hora;
+    private Date inicio;
+    private Date fim;
+    private File arquivo;
+    private Cliente cliente;
+    private Time horarios;
+    private boolean ativa;
 
     public Propaganda() {
     }
 
     public Propaganda(String nome, Time hora) {
         this.nome = nome;
-        this.hora = hora;
     }
 
     
@@ -42,17 +49,59 @@ public class Propaganda {
         this.nome = nome;
     }
 
-    public Time getHora() {
-        return hora;
+    public Date getInicio() {
+        return inicio;
     }
 
-    public void setHora(Time hora) {
-        this.hora = hora;
+    public void setInicio(Date inicio) {
+        this.inicio = inicio;
     }
+
+    public Date getFim() {
+        return fim;
+    }
+
+    public void setFim(Date fim) {
+        this.fim = fim;
+    }
+
+    public File getArquivo() {
+        return arquivo;
+    }
+
+    public void setArquivo(File arquivo) {
+        this.arquivo = arquivo;
+    }
+
+    public Cliente getCliente() {
+        return cliente;
+    }
+
+    public void setCliente(Cliente cliente) {
+        this.cliente = cliente;
+    }
+
+    public Time getHorarios() {
+        return horarios;
+    }
+
+    public void setHorarios(Time horarios) {
+        this.horarios = horarios;
+    }
+
+    public boolean isAtiva() {
+        return ativa;
+    }
+
+    public void setAtiva(boolean ativa) {
+        this.ativa = ativa;
+    }
+
+   
 
     @Override
     public String toString() {
-        return hora+" "+nome;
+        return nome;
     }
     
     
