@@ -6,6 +6,8 @@
 
 package bradio;
 
+import Model.DAO.ClienteDAO;
+import Model.DAO.ConnectionFactory;
 import Model.Musica;
 import Model.Player;
 import java.io.File;
@@ -25,9 +27,7 @@ public class LoginController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-//        Player<Musica> player = new Player<>();
-//        player.setArquivo(new File("E:\\Musicas\\True\\Link Park - Leave Out All The Rest.ogg"));
-//        player.play();
+         
     }    
     
 }
