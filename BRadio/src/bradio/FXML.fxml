@@ -1,0 +1,329 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.net.*?>
+<?import java.util.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane id="AnchorPane" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="540.0" prefWidth="960.0" style="-fx-background-color: #666;" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="bradio.FXMLController">
+  <children>
+    <VBox id="VBox" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" spacing="0.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <children>
+        <MenuBar maxHeight="-Infinity" maxWidth="1.7976931348623157E308" prefHeight="29.0" prefWidth="960.0" useSystemMenuBar="false" VBox.vgrow="ALWAYS">
+          <menus>
+            <Menu mnemonicParsing="false" text="Programar">
+              <items>
+                <MenuItem mnemonicParsing="false" text="Close" />
+              </items>
+            </Menu>
+            <Menu mnemonicParsing="false" text="Editar">
+              <items>
+                <MenuItem mnemonicParsing="false" text="Delete" />
+              </items>
+            </Menu>
+            <Menu mnemonicParsing="false" text="Propriedades">
+              <items>
+                <MenuItem mnemonicParsing="false" text="About" />
+              </items>
+            </Menu>
+          </menus>
+          <VBox.margin>
+            <Insets fx:id="x1" />
+          </VBox.margin>
+        </MenuBar>
+        <HBox alignment="TOP_CENTER" fillHeight="true" maxHeight="-1.0" maxWidth="-1.0" padding="$x1" prefHeight="52.0" prefWidth="960.0" style="" VBox.vgrow="NEVER">
+          <children>
+            <Label alignment="CENTER" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" prefHeight="50.0" prefWidth="400.0" text="Radio da Cidade de Apiaí" HBox.hgrow="ALWAYS">
+              <font>
+                <Font name="System Bold" size="33.0" />
+              </font>
+              <HBox.margin>
+                <Insets fx:id="x1" />
+              </HBox.margin>
+            </Label>
+            <Label alignment="CENTER" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" prefHeight="47.000099999997474" prefWidth="160.0" style="-fx-text-fill: #FF0;" text="20:15:17" HBox.hgrow="ALWAYS" HBox.margin="$x1">
+              <font>
+                <Font name="System Bold" size="35.0" />
+              </font>
+            </Label>
+            <Label alignment="CENTER" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" prefHeight="50.0" prefWidth="400.0" text="Quinta-feira, 21 de abril de 2014" textFill="#292929" HBox.hgrow="ALWAYS">
+              <font>
+                <Font name="System Bold" size="25.0" />
+              </font>
+            </Label>
+          </children>
+          <VBox.margin>
+            <Insets bottom="5.0" />
+          </VBox.margin>
+        </HBox>
+        <HBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" padding="$x3" prefHeight="485.0" prefWidth="960.0" VBox.vgrow="ALWAYS">
+          <children>
+            <VBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="485.0" prefWidth="150.0" HBox.hgrow="ALWAYS">
+              <children>
+                <Label alignment="CENTER" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" prefWidth="250.0" text="Horários de Propagandas" textAlignment="JUSTIFY" underline="false" wrapText="true" VBox.vgrow="ALWAYS">
+                  <font>
+                    <Font name="System Bold" size="14.0" />
+                  </font>
+                </Label>
+                <ListView id="listaPropaganda" fx:id="listaPropagandas" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="466.0" prefWidth="240.0" style="" VBox.vgrow="ALWAYS" />
+              </children>
+              <padding>
+                <Insets right="5.0" />
+              </padding>
+            </VBox>
+            <VBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="485.0" prefWidth="710.0" HBox.hgrow="ALWAYS">
+              <children>
+                <HBox prefHeight="128.0" prefWidth="735.0" VBox.vgrow="NEVER">
+                  <children>
+                    <VBox id="VBox" alignment="TOP_LEFT" maxHeight="-1.0" prefHeight="128.0" prefWidth="725.0" spacing="5.0" HBox.hgrow="ALWAYS">
+                      <children>
+                        <ProgressBar maxHeight="-Infinity" maxWidth="1.7976931348623157E308" prefHeight="19.0" prefWidth="735.0" progress="0.5" VBox.vgrow="ALWAYS" />
+                        <HBox prefHeight="100.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
+                          <children>
+                            <VBox prefHeight="100.0" prefWidth="400.0" style="-fx-background-color: #666;" HBox.hgrow="ALWAYS">
+                              <children>
+                                <HBox id="HBox" alignment="CENTER_LEFT" spacing="5.0" style="" VBox.vgrow="NEVER">
+                                  <children>
+                                    <Label maxHeight="-Infinity" maxWidth="-Infinity" prefWidth="60.0" text="Codigo:" textFill="WHITE">
+                                      <font>
+                                        <Font name="System Bold" size="12.0" fx:id="x4" />
+                                      </font>
+                                    </Label>
+                                    <TextField editable="false" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" prefWidth="200.0" HBox.hgrow="ALWAYS" />
+                                  </children>
+                                </HBox>
+                                <HBox id="HBox" alignment="CENTER_LEFT" spacing="5.0">
+                                  <children>
+                                    <Label font="$x4" maxHeight="-Infinity" maxWidth="-Infinity" prefWidth="60.0" text="Música:" textFill="WHITE" />
+                                    <TextField editable="false" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" prefWidth="200.0" HBox.hgrow="ALWAYS" />
+                                  </children>
+                                </HBox>
+                                <HBox id="HBox" alignment="CENTER_LEFT" spacing="5.0">
+                                  <children>
+                                    <Label font="$x4" maxHeight="-Infinity" maxWidth="-Infinity" prefWidth="60.0" text="Cantor:" textFill="WHITE" />
+                                    <TextField editable="false" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" prefWidth="200.0" HBox.hgrow="ALWAYS" />
+                                  </children>
+                                </HBox>
+                                <HBox id="HBox" alignment="CENTER_LEFT" spacing="5.0">
+                                  <children>
+                                    <Label font="$x4" maxHeight="-Infinity" maxWidth="-Infinity" prefWidth="60.0" text="Álbum:" textFill="WHITE" />
+                                    <TextField editable="false" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" prefWidth="200.0" HBox.hgrow="ALWAYS" />
+                                  </children>
+                                </HBox>
+                                <HBox id="HBox" alignment="CENTER_LEFT" spacing="5.0">
+                                  <children>
+                                    <Label font="$x4" maxHeight="-Infinity" maxWidth="-Infinity" prefWidth="60.0" text="Gênero:" textFill="WHITE" />
+                                    <TextField editable="false" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" prefWidth="200.0" HBox.hgrow="ALWAYS" />
+                                  </children>
+                                </HBox>
+                              </children>
+                            </VBox>
+                            <VBox prefHeight="100.0" prefWidth="300.0" HBox.hgrow="ALWAYS">
+                              <children>
+                                <Label alignment="CENTER" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" prefWidth="345.0" text="Execução de Propagandas e Vinhetas" VBox.vgrow="ALWAYS">
+                                  <font>
+                                    <Font name="System Bold" size="16.0" fx:id="x2" />
+                                  </font>
+                                </Label>
+                                <ProgressBar maxHeight="-Infinity" maxWidth="1.7976931348623157E308" prefHeight="50.0" prefWidth="340.0" progress="0.75" VBox.vgrow="ALWAYS" />
+                                <Label alignment="CENTER" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" prefHeight="27.0" prefWidth="340.0" text="Nome da Propaganda/Vinheta" textFill="WHITE" VBox.vgrow="ALWAYS" />
+                              </children>
+                              <padding>
+                                <Insets bottom="5.0" left="5.0" right="5.0" fx:id="x3" />
+                              </padding>
+                            </VBox>
+                          </children>
+                        </HBox>
+                      </children>
+                    </VBox>
+                  </children>
+                  <padding>
+                    <Insets fx:id="x1" />
+                  </padding>
+                </HBox>
+                <HBox id="HBox" alignment="CENTER_LEFT" maxHeight="300.0" prefHeight="200.0" prefWidth="755.0" spacing="5.0" VBox.vgrow="ALWAYS">
+                  <children>
+                    <VBox prefHeight="357.0" prefWidth="400.0" HBox.hgrow="ALWAYS">
+                      <children>
+                        <VBox id="VBox" alignment="CENTER" maxHeight="-1.0" spacing="5.0" VBox.vgrow="ALWAYS">
+                          <children>
+                            <HBox id="HBox" alignment="CENTER" spacing="5.0">
+                              <children>
+                                <Label alignment="BASELINE_RIGHT" font="$x2" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" prefWidth="240.0" text="Reproduzir" HBox.hgrow="ALWAYS">
+                                  <HBox.margin>
+                                    <Insets right="10.0" />
+                                  </HBox.margin>
+                                </Label>
+                                <Button maxHeight="-Infinity" maxWidth="1.7976931348623157E308" mnemonicParsing="false" prefWidth="146.0" text="Proxima Musica" HBox.hgrow="ALWAYS">
+                                  <HBox.margin>
+                                    <Insets fx:id="x1" />
+                                  </HBox.margin>
+                                </Button>
+                              </children>
+                            </HBox>
+                            <ListView maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="140.0" prefWidth="400.0" VBox.vgrow="ALWAYS" />
+                            <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" prefWidth="425.0" text="Remover Selecionada" VBox.vgrow="ALWAYS" />
+                          </children>
+                          <padding>
+                            <Insets top="5.0" />
+                          </padding>
+                        </VBox>
+                      </children>
+                      <HBox.margin>
+                        <Insets fx:id="x1" />
+                      </HBox.margin>
+                    </VBox>
+                    <VBox prefHeight="355.0" prefWidth="300.0" HBox.hgrow="ALWAYS">
+                      <children>
+                        <VBox id="VBox" alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" prefHeight="108.0" spacing="5.0" VBox.vgrow="ALWAYS">
+                          <children>
+                            <Label alignment="CENTER" font="$x2" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" prefWidth="325.0" text="Vinhetas" VBox.vgrow="NEVER" />
+                            <HBox maxHeight="-Infinity" maxWidth="1.7976931348623157E308" prefHeight="80.0" prefWidth="325.0" spacing="0.0" VBox.vgrow="NEVER">
+                              <children>
+                                <VBox prefHeight="164.0" prefWidth="165.0" spacing="10.0" HBox.hgrow="ALWAYS">
+                                  <children>
+                                    <HBox maxHeight="-Infinity" maxWidth="1.7976931348623157E308" minHeight="19.0" prefHeight="19.0" prefWidth="165.0" VBox.vgrow="ALWAYS">
+                                      <children>
+                                        <TextField maxHeight="-Infinity" maxWidth="1.7976931348623157E308" prefWidth="87.0" promptText="Vinheta" HBox.hgrow="ALWAYS" />
+                                        <Button maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" text="Play" HBox.hgrow="ALWAYS" />
+                                      </children>
+                                    </HBox>
+                                    <HBox maxHeight="-Infinity" maxWidth="1.7976931348623157E308" minHeight="19.0" prefHeight="19.0" prefWidth="165.0" VBox.vgrow="ALWAYS">
+                                      <children>
+                                        <TextField maxHeight="-Infinity" maxWidth="1.7976931348623157E308" prefWidth="87.0" promptText="Vinheta" HBox.hgrow="ALWAYS" />
+                                        <Button maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" text="Play" HBox.hgrow="ALWAYS" />
+                                      </children>
+                                    </HBox>
+                                    <HBox maxHeight="-Infinity" maxWidth="1.7976931348623157E308" minHeight="19.0" prefHeight="19.0" prefWidth="165.0" VBox.vgrow="ALWAYS">
+                                      <children>
+                                        <TextField maxHeight="-Infinity" maxWidth="1.7976931348623157E308" prefWidth="87.0" promptText="Vinheta" HBox.hgrow="ALWAYS" />
+                                        <Button maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" text="Play" HBox.hgrow="ALWAYS" />
+                                      </children>
+                                    </HBox>
+                                  </children>
+                                  <padding>
+                                    <Insets right="5.0" />
+                                  </padding>
+                                </VBox>
+                                <VBox prefHeight="164.0" prefWidth="165.0" spacing="10.0" HBox.hgrow="ALWAYS">
+                                  <children>
+                                    <HBox maxHeight="-Infinity" maxWidth="1.7976931348623157E308" minHeight="19.0" prefHeight="19.0" prefWidth="165.0" VBox.vgrow="ALWAYS">
+                                      <children>
+                                        <TextField maxHeight="-Infinity" maxWidth="1.7976931348623157E308" prefWidth="87.0" promptText="Vinheta" HBox.hgrow="ALWAYS" />
+                                        <Button maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" text="Play" HBox.hgrow="ALWAYS">
+                                          <HBox.margin>
+                                            <Insets fx:id="x1" />
+                                          </HBox.margin>
+                                        </Button>
+                                      </children>
+                                    </HBox>
+                                    <HBox maxHeight="-Infinity" maxWidth="1.7976931348623157E308" minHeight="19.0" prefHeight="19.0" prefWidth="165.0" VBox.vgrow="ALWAYS">
+                                      <children>
+                                        <TextField maxHeight="-Infinity" maxWidth="1.7976931348623157E308" prefWidth="87.0" promptText="Vinheta" HBox.hgrow="ALWAYS" />
+                                        <Button maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" text="Play" HBox.hgrow="ALWAYS" />
+                                      </children>
+                                    </HBox>
+                                    <HBox maxHeight="-Infinity" maxWidth="1.7976931348623157E308" minHeight="19.0" prefHeight="19.0" prefWidth="165.0" VBox.vgrow="ALWAYS">
+                                      <children>
+                                        <TextField maxHeight="-Infinity" maxWidth="1.7976931348623157E308" prefWidth="87.0" promptText="Vinheta" HBox.hgrow="ALWAYS" />
+                                        <Button maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" text="Play" HBox.hgrow="ALWAYS" />
+                                      </children>
+                                    </HBox>
+                                  </children>
+                                </VBox>
+                              </children>
+                              <padding>
+                                <Insets fx:id="x1" />
+                              </padding>
+                            </HBox>
+                          </children>
+                        </VBox>
+                      </children>
+                    </VBox>
+                  </children>
+                  <VBox.margin>
+                    <Insets fx:id="x1" />
+                  </VBox.margin>
+                </HBox>
+                <HBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="200.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
+                  <children>
+                    <VBox id="VBox" alignment="CENTER" prefHeight="184.0" prefWidth="425.0" spacing="5.0" HBox.hgrow="ALWAYS">
+                      <children>
+                        <Label alignment="CENTER" font="$x2" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" prefWidth="400.0" text="Músicas" />
+                        <ListView maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="132.0" prefWidth="425.0" VBox.vgrow="ALWAYS" />
+                        <Button maxHeight="-Infinity" maxWidth="1.7976931348623157E308" minHeight="19.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="400.0" text="Pesquisar" VBox.vgrow="NEVER" />
+                      </children>
+                    </VBox>
+                    <VBox prefHeight="184.0" prefWidth="331.0" HBox.hgrow="ALWAYS">
+                      <children>
+                        <Label alignment="CENTER" font="$x2" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" prefHeight="22.0" prefWidth="331.0" text="Detalhes da Musica" VBox.vgrow="ALWAYS">
+                          <VBox.margin>
+                            <Insets bottom="5.0" />
+                          </VBox.margin>
+                        </Label>
+                        <HBox id="HBox" alignment="CENTER_LEFT" spacing="5.0" VBox.vgrow="NEVER">
+                          <children>
+                            <Label font="$x4" maxHeight="-Infinity" maxWidth="-Infinity" prefWidth="60.0" text="Codigo:" textFill="WHITE" />
+                            <TextField editable="false" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" prefWidth="200.0" HBox.hgrow="ALWAYS" />
+                          </children>
+                          <padding>
+                            <Insets fx:id="x1" />
+                          </padding>
+                        </HBox>
+                        <HBox id="HBox" alignment="CENTER_LEFT" spacing="5.0">
+                          <children>
+                            <Label font="$x4" maxHeight="-Infinity" maxWidth="-Infinity" prefWidth="60.0" text="Música:" textFill="WHITE" />
+                            <TextField editable="false" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" prefWidth="200.0" HBox.hgrow="ALWAYS" />
+                          </children>
+                        </HBox>
+                        <HBox id="HBox" alignment="CENTER_LEFT" spacing="5.0">
+                          <children>
+                            <Label font="$x4" maxHeight="-Infinity" maxWidth="-Infinity" prefWidth="60.0" text="Cantor:" textFill="WHITE" />
+                            <TextField editable="false" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" prefWidth="200.0" HBox.hgrow="ALWAYS" />
+                          </children>
+                        </HBox>
+                        <HBox id="HBox" alignment="CENTER_LEFT" spacing="5.0">
+                          <children>
+                            <Label font="$x4" maxHeight="-Infinity" maxWidth="-Infinity" prefWidth="60.0" text="Álbum:" textFill="WHITE" />
+                            <TextField editable="false" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" prefWidth="200.0" HBox.hgrow="ALWAYS" />
+                          </children>
+                        </HBox>
+                        <HBox id="HBox" alignment="CENTER_LEFT" spacing="5.0">
+                          <children>
+                            <Label font="$x4" maxHeight="-Infinity" maxWidth="-Infinity" prefWidth="60.0" text="Gênero:" textFill="WHITE" />
+                            <TextField editable="false" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" prefWidth="200.0" HBox.hgrow="ALWAYS" />
+                          </children>
+                        </HBox>
+                        <Button maxHeight="-Infinity" maxWidth="1.7976931348623157E308" mnemonicParsing="false" prefWidth="331.0" text="Adicionar na Playlist" VBox.vgrow="ALWAYS">
+                          <VBox.margin>
+                            <Insets top="5.0" />
+                          </VBox.margin>
+                        </Button>
+                      </children>
+                      <padding>
+                        <Insets left="5.0" />
+                      </padding>
+                      <HBox.margin>
+                        <Insets fx:id="x1" />
+                      </HBox.margin>
+                    </VBox>
+                  </children>
+                </HBox>
+              </children>
+              <padding>
+                <Insets fx:id="x1" />
+              </padding>
+            </VBox>
+          </children>
+        </HBox>
+      </children>
+    </VBox>
+  </children>
+  <stylesheets>
+    <URL value="@../css/RadioStyle.css" />
+  </stylesheets>
+</AnchorPane>
