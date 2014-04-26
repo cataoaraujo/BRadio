@@ -1,0 +1,17 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 22/04/2014, 15:32:25
+    Author     : Rodrigo
+*/
+
+#listaPropaganda .list-cell:filled:selected:focused, .list-cell:filled:selected {
+    /* 3:, 4: */
+    -fx-background-color: linear-gradient(#333 0%, #777 25%, #aaa 75%, #eee 100%);
+    -fx-text-fill: white; /* 5 */
+}
+#listaPropaganda .list-cell { -fx-font-weight: bold; -fx-background-color: #00a; -fx-text-fill: #ff0; /* 5 */ }
+#listaPropaganda .list-cell:odd { -fx-background-color: #00a; /* 1 */ }
