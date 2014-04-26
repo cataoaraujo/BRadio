@@ -10,8 +10,10 @@ import java.io.File;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.Time;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Date;
 
 /**
  *
@@ -102,5 +104,46 @@ public class PropagandaDAO extends GenericDAO<Propaganda> {
         }
         return propagandas;
     }
+    
+    public Propaganda getByCodigo(int codigo) {
+        String sqlGetAll = "SELECT * FROM TB_PROPAGANDA WHERE PRO_CODIGO=?";
+        try {
+            PreparedStatement pStatement = conn.prepareStatement(sqlGetAll);
+            pStatement.setInt(1, codigo);
+            ResultSet rs = pStatement.executeQuery();
+            while (rs.next()) {
+                Propaganda propaganda = new Propaganda();
+                propaganda.setCodigo(rs.getInt("PRO_CODIGO"));
+                propaganda.setNome(rs.getString("PRO_NOME"));
+                propaganda.setAtiva(rs.getBoolean("PRO_ATIVA"));
+                ClienteDAO cliente = new ClienteDAO(ConnectionFactory.getConnection());
+                propaganda.setCliente(cliente.getByCodigo(rs.getInt("PRO_CODCLIENTE")));
+                propaganda.setArquivo(new File(rs.getString("PRO_ARQUIVO")));
+                return propaganda;
+            }
+        } catch (Exception e) {
+            //who cares?
+        }
+        return null;
+    }
+    public Propaganda getByDia(Date data) {
+        String sqlGetAll = "SELECT * FROM tb_diaspropagandas WHERE DIP_DATA =?";
+        Collection<Propaganda> propagandas = new ArrayList<>();
+        try {
+            PreparedStatement pStatement = conn.prepareStatement(sqlGetAll);
+            pStatement.setObject(1, data);
+            ResultSet rs = pStatement.executeQuery();
+            while (rs.next()) {
+                Propaganda propaganda = getByCodigo(rs.getInt("DIP_CODPROPAGANDA"));
+                propaganda.setHorarios(rs.getTime("DIP_HORARIOPREVISTO"));
+                propaganda.setData(rs.getDate("DIP_DATA"));
+                return propaganda;
+            }
+        } catch (Exception e) {
+            //who cares?
+        }
+        return null;
+    }
+
 
 }
