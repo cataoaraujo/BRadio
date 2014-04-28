@@ -62,6 +62,12 @@ public class Programa {
     public void setRadialistas(ArrayList<Radialista> radialistas) {
         this.radialistas = radialistas;
     }
+
+    @Override
+    public String toString() {
+        return nome+ " radialistas=" + radialistas + '}';
+    }
+    
     
     
 }

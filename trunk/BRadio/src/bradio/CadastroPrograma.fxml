@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.collections.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane id="AnchorPane" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="450.0" prefWidth="300.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="bradio.CadastroProgramaController">
+  <children>
+    <VBox prefHeight="450.0" prefWidth="300.0" spacing="10.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <children>
+        <Label maxHeight="-Infinity" maxWidth="1.7976931348623157E308" prefWidth="280.0" text="Novo Programa" VBox.vgrow="ALWAYS">
+          <font>
+            <Font name="System Bold" size="16.0" />
+          </font>
+        </Label>
+        <HBox maxHeight="-Infinity" maxWidth="1.7976931348623157E308" prefHeight="22.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
+          <children>
+            <Label maxHeight="-Infinity" maxWidth="-Infinity" prefWidth="100.0" text="Nome:" HBox.hgrow="ALWAYS" />
+            <TextField fx:id="edtNome" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" prefWidth="200.0" HBox.hgrow="ALWAYS" />
+          </children>
+        </HBox>
+        <HBox maxHeight="-Infinity" maxWidth="1.7976931348623157E308" prefHeight="22.0" prefWidth="200.0">
+          <children>
+            <Label maxHeight="-Infinity" maxWidth="-Infinity" prefWidth="100.0" text="Inicia as:" HBox.hgrow="ALWAYS" />
+            <TextField id="edtInicio" fx:id="edtHInicio" maxHeight="-Infinity" maxWidth="-Infinity" prefWidth="50.0" promptText="10" HBox.hgrow="ALWAYS" />
+            <Label text=":" />
+            <TextField id="edtInicio" fx:id="edtMInicio" maxHeight="-Infinity" maxWidth="-Infinity" prefWidth="50.0" promptText="45" />
+            <Label text=":" />
+            <TextField id="edtInicio" fx:id="edtSInicio" maxHeight="-Infinity" maxWidth="-Infinity" prefWidth="50.0" promptText="00" />
+          </children>
+        </HBox>
+        <HBox maxHeight="-Infinity" maxWidth="1.7976931348623157E308" prefHeight="22.0" prefWidth="200.0">
+          <children>
+            <Label maxHeight="-Infinity" maxWidth="-Infinity" prefWidth="100.0" text="Termina as:" HBox.hgrow="ALWAYS" />
+            <TextField id="edtInicio" fx:id="edtHFim" maxHeight="-Infinity" maxWidth="-Infinity" prefWidth="50.0" promptText="11" HBox.hgrow="ALWAYS" />
+            <Label text=":" />
+            <TextField id="edtInicio" fx:id="edtMFim" maxHeight="-Infinity" maxWidth="-Infinity" prefWidth="50.0" promptText="45" />
+            <Label text=":" />
+            <TextField id="edtInicio" fx:id="edtSFim" maxHeight="-Infinity" maxWidth="-Infinity" prefWidth="50.0" promptText="00" />
+          </children>
+        </HBox>
+        <VBox prefHeight="280.0" prefWidth="280.0" spacing="10.0" VBox.vgrow="ALWAYS">
+          <children>
+            <HBox id="HBox" alignment="TOP_LEFT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" spacing="5.0" VBox.vgrow="ALWAYS">
+              <children>
+                <Label maxHeight="-Infinity" maxWidth="-Infinity" prefWidth="100.0" text="Radialistas:" />
+                <ListView fx:id="listaRadialitas" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="200.0" prefWidth="200.0" HBox.hgrow="ALWAYS" />
+              </children>
+            </HBox>
+            <ComboBox fx:id="cbRadialistas" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" prefHeight="21.0" prefWidth="280.0" VBox.vgrow="ALWAYS">
+              <items>
+                <FXCollections fx:factory="observableArrayList">
+                  <String fx:value="Item 1" />
+                  <String fx:value="Item 2" />
+                  <String fx:value="Item 3" />
+                </FXCollections>
+              </items>
+            </ComboBox>
+            <Button maxHeight="-Infinity" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#addRadialista" prefWidth="280.0" text="Adicionar Radialista Selecionado" VBox.vgrow="ALWAYS" />
+          </children>
+        </VBox>
+        <Button maxHeight="-Infinity" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#cadastrar" prefHeight="31.0" prefWidth="280.0" text="Cadastrar" VBox.vgrow="ALWAYS">
+          <font>
+            <Font name="System Bold" size="12.0" />
+          </font>
+          <VBox.margin>
+            <Insets top="10.0" />
+          </VBox.margin>
+        </Button>
+        <Button maxHeight="-Infinity" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#voltar" prefWidth="280.0" text="Voltar" VBox.vgrow="ALWAYS" />
+      </children>
+      <padding>
+        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+      </padding>
+    </VBox>
+  </children>
+</AnchorPane>

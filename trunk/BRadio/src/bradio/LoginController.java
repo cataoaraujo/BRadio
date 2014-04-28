@@ -3,17 +3,18 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package bradio;
 
-import Model.DAO.ClienteDAO;
 import Model.DAO.ConnectionFactory;
-import Model.Musica;
-import Model.Player;
-import java.io.File;
+import Model.DAO.ProgramaDAO;
+import Model.Programa;
+import Model.Radialista;
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.ListView;
 
 /**
  * FXML Controller class
@@ -22,12 +23,39 @@ import javafx.fxml.Initializable;
  */
 public class LoginController implements Initializable {
 
+    @FXML
+    ComboBox<Programa> cbProgramas;
+    
+    private static Programa programaAtual;
+
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-         
-    }    
-    
+        ProgramaDAO pd = new ProgramaDAO(ConnectionFactory.getConnection());
+        cbProgramas.getItems().addAll(pd.getAll());
+    }
+
+    public static Programa getProgramaAtual() {
+        return programaAtual;
+    }
+
+    public void iniciar() {
+        if (cbProgramas.getSelectionModel().getSelectedItem() != null) {
+            programaAtual = cbProgramas.getSelectionModel().getSelectedItem();
+            BRadio.getInstance().goToPrincipal();
+        }else{
+            AlertDialog.show("Escolha um programa antes de iniciar.");
+        }
+    }
+
+    public void cadastrarRadialista() {
+        BRadio.getInstance().goToCadastroRadialista();
+    }
+
+    public void cadastrarPrograma() {
+        BRadio.getInstance().goToCadastroPrograma();
+    }
+
 }
