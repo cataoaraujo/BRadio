@@ -8,6 +8,7 @@ package bradio;
 import insidefx.undecorator.Undecorator;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.JavaFXBuilderFactory;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.layout.Region;
@@ -21,18 +22,74 @@ import javafx.stage.StageStyle;
  */
 public class BRadio extends Application {
 
-    @Override
-    public void start(Stage stage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("Login.fxml"));
+    private static BRadio instance;
+    private Stage stage;
 
-        Undecorator undecorator = new Undecorator(stage, (Region) root);
-        undecorator.getStylesheets().add("skin/undecorator.css");
-        Scene scene = new Scene(undecorator);
-        //Scene scene = new Scene(root);
-        scene.setFill(Color.TRANSPARENT);
-        stage.initStyle(StageStyle.TRANSPARENT);
-        stage.setScene(scene);
+    public BRadio() {
+        instance = this;
+    }
+
+    public static BRadio getInstance() {
+        return instance;
+    }
+
+    @Override
+    public void start(Stage primaryStage) throws Exception {
+        stage = primaryStage;
+        goToLogin();
         stage.show();
+    }
+
+    public void goToLogin() {
+        try {
+            replaceSceneContent("Login.fxml");
+        } catch (Exception ex) {
+            System.out.println("erro: ProjetoFinal.goToLogin");
+        }
+    }
+
+    public void goToPrincipal() {
+        try {
+            replaceSceneContent("Principal.fxml");
+        } catch (Exception ex) {
+            System.out.println("erro: ProjetoFinal.goToPrincipal");
+        }
+    }
+    
+    public void goToCadastroRadialista() {
+        try {
+            replaceSceneContent("cadastroRadialista.fxml");
+        } catch (Exception ex) {
+            
+        }
+    }
+    public void goToCadastroPrograma() {
+        try {
+            replaceSceneContent("CadastroPrograma.fxml");
+        } catch (Exception ex) {
+            
+        }
+    }
+
+    private Parent replaceSceneContent(String fxml) {
+        try {
+            Parent page = (Parent) FXMLLoader.load(BRadio.class.getResource(fxml), null, new JavaFXBuilderFactory());
+            stage.close(); //Para nao dar erro no Undecorator na hora de trocar a tela
+            stage = new Stage(StageStyle.TRANSPARENT);
+            Undecorator undecorator = new Undecorator(stage, (Region) page);
+            undecorator.getStylesheets().add("skin/undecorator.css");
+            Scene scene = new Scene(undecorator);
+            scene.setFill(Color.TRANSPARENT);
+            stage.setScene(scene);
+
+            stage.sizeToScene();
+            stage.centerOnScreen();
+            stage.show();
+            return page;
+        } catch (Exception e) {
+            System.out.println("Erro: replaceSceneContent: " + e);
+            return null;
+        }
     }
 
     /**

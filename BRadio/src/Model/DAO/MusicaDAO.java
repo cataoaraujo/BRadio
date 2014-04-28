@@ -109,4 +109,118 @@ public class MusicaDAO extends GenericDAO<Musica>{
         return musicas;
     }
     
+    public Musica getByCodigo(int codigo) {
+        String sqlGetAll = "SELECT * FROM TB_MUSICA WHERE MUS_CODIGO = ?";
+        Musica musica = null;
+        try {
+            PreparedStatement pStatement = conn.prepareStatement(sqlGetAll);
+            pStatement.setInt(1, codigo);
+            ResultSet rs = pStatement.executeQuery();
+            while (rs.next()) {
+                musica = new Musica();
+                musica.setCodigo(rs.getInt("MUS_CODIGO"));
+                musica.setTitulo(rs.getString("MUS_TITULO"));
+                musica.setGenero(rs.getString("MUS_GENERO"));
+                musica.setArtista(rs.getString("MUS_ARTISTA"));
+                musica.setAlbum(rs.getString("MUS_ALBUM"));
+                musica.setArquivo(new File(rs.getString("MUS_ARQUIVO")));
+            }
+        } catch (Exception e) {
+            //who cares?
+        }
+        return musica;
+    }
+    
+    public Collection<Musica> getByTitulo(String titulo) {
+        String sqlGetAll = "SELECT * FROM TB_MUSICA WHERE MUS_TITULO LIKE ?";
+        Collection<Musica> musicas = new ArrayList<>();
+        try {
+            PreparedStatement pStatement = conn.prepareStatement(sqlGetAll);
+            pStatement.setString(1, "%"+titulo+"%");
+            ResultSet rs = pStatement.executeQuery();
+            while (rs.next()) {
+                Musica musica = new Musica();
+                musica.setCodigo(rs.getInt("MUS_CODIGO"));
+                musica.setTitulo(rs.getString("MUS_TITULO"));
+                musica.setGenero(rs.getString("MUS_GENERO"));
+                musica.setArtista(rs.getString("MUS_ARTISTA"));
+                musica.setAlbum(rs.getString("MUS_ALBUM"));
+                musica.setArquivo(new File(rs.getString("MUS_ARQUIVO")));
+                musicas.add(musica);
+            }
+        } catch (Exception e) {
+            //who cares?
+        }
+        return musicas;
+    }
+    
+    public Collection<Musica> getByGenero(String genero) {
+        String sqlGetAll = "SELECT * FROM TB_MUSICA WHERE MUS_GENERO LIKE ?";
+        Collection<Musica> musicas = new ArrayList<>();
+        try {
+            PreparedStatement pStatement = conn.prepareStatement(sqlGetAll);
+            pStatement.setString(1, "%"+genero+"%");
+            ResultSet rs = pStatement.executeQuery();
+            while (rs.next()) {
+                Musica musica = new Musica();
+                musica.setCodigo(rs.getInt("MUS_CODIGO"));
+                musica.setTitulo(rs.getString("MUS_TITULO"));
+                musica.setGenero(rs.getString("MUS_GENERO"));
+                musica.setArtista(rs.getString("MUS_ARTISTA"));
+                musica.setAlbum(rs.getString("MUS_ALBUM"));
+                musica.setArquivo(new File(rs.getString("MUS_ARQUIVO")));
+                musicas.add(musica);
+            }
+        } catch (Exception e) {
+            //who cares?
+        }
+        return musicas;
+    }
+    
+    public Collection<Musica> getByArtista(String artista) {
+        String sqlGetAll = "SELECT * FROM TB_MUSICA WHERE MUS_ARTISTA LIKE ?";
+        Collection<Musica> musicas = new ArrayList<>();
+        try {
+            PreparedStatement pStatement = conn.prepareStatement(sqlGetAll);
+            pStatement.setString(1, "%"+artista+"%");
+            ResultSet rs = pStatement.executeQuery();
+            while (rs.next()) {
+                Musica musica = new Musica();
+                musica.setCodigo(rs.getInt("MUS_CODIGO"));
+                musica.setTitulo(rs.getString("MUS_TITULO"));
+                musica.setGenero(rs.getString("MUS_GENERO"));
+                musica.setArtista(rs.getString("MUS_ARTISTA"));
+                musica.setAlbum(rs.getString("MUS_ALBUM"));
+                musica.setArquivo(new File(rs.getString("MUS_ARQUIVO")));
+                musicas.add(musica);
+            }
+        } catch (Exception e) {
+            //who cares?
+        }
+        return musicas;
+    }
+    
+    public Collection<Musica> getByAlbum(String album) {
+        String sqlGetAll = "SELECT * FROM TB_MUSICA WHERE MUS_TITULO LIKE ?";
+        Collection<Musica> musicas = new ArrayList<>();
+        try {
+            PreparedStatement pStatement = conn.prepareStatement(sqlGetAll);
+            pStatement.setString(1, "%"+album+"%");
+            ResultSet rs = pStatement.executeQuery();
+            while (rs.next()) {
+                Musica musica = new Musica();
+                musica.setCodigo(rs.getInt("MUS_CODIGO"));
+                musica.setTitulo(rs.getString("MUS_TITULO"));
+                musica.setGenero(rs.getString("MUS_GENERO"));
+                musica.setArtista(rs.getString("MUS_ARTISTA"));
+                musica.setAlbum(rs.getString("MUS_ALBUM"));
+                musica.setArquivo(new File(rs.getString("MUS_ARQUIVO")));
+                musicas.add(musica);
+            }
+        } catch (Exception e) {
+            //who cares?
+        }
+        return musicas;
+    }
+    
 }

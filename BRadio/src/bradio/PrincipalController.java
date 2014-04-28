@@ -9,18 +9,11 @@ import Model.*;
 import java.net.URL;
 import java.sql.Time;
 import java.util.ResourceBundle;
-import javafx.event.ActionEvent;
-import javafx.fxml.FXML;
+import javafx.event.EventType;
 import javafx.fxml.Initializable;
-import javafx.geometry.Insets;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
-import javafx.scene.layout.Background;
-import javafx.scene.layout.BackgroundFill;
-import javafx.scene.layout.CornerRadii;
-import javafx.scene.paint.Color;
-import javafx.scene.paint.Paint;
 import javafx.util.Callback;
 
 /**
@@ -44,12 +37,15 @@ class ListCellPropaganda extends ListCell<Propaganda> {
     }
 }
 
-public class FXMLController implements Initializable {
+public class PrincipalController implements Initializable {
 
     public ListView<Propaganda> listaPropagandas = new ListView<Propaganda>();
+    public Label relogio = new Label();
+    public Label data = new Label();
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        Relogio r = new Relogio(relogio,data);
         // TODO
         listaPropagandas.setCellFactory(new Callback<ListView<Propaganda>, ListCell<Propaganda>>() {
 

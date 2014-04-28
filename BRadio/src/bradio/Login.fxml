@@ -10,7 +10,7 @@
 <?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane id="AnchorPane" prefHeight="256.0" prefWidth="500.0" styleClass="" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="bradio.LoginController">
+<AnchorPane id="AnchorPane" prefHeight="256.0" prefWidth="500.0" style="-fx-background-color: #000" styleClass="null" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="bradio.LoginController">
   <children>
     <VBox layoutX="0.0" layoutY="0.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="256.0" prefWidth="500.0" style="-fx-background-color: #000;">
       <children>
@@ -23,16 +23,12 @@
             </ImageView>
             <VBox id="VBox" alignment="CENTER" spacing="5.0">
               <children>
-                <ComboBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="21.0" prefWidth="295.0" promptText="Escolher Programa">
+                <ComboBox id="listaProgramas" fx:id="cbProgramas" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="21.0" prefWidth="295.0" promptText="Escolher Programa">
                   <items>
-                    <FXCollections fx:factory="observableArrayList">
-                      <String fx:value="Item 1" />
-                      <String fx:value="Item 2" />
-                      <String fx:value="Item 3" />
-                    </FXCollections>
+                    <FXCollections fx:factory="observableArrayList" />
                   </items>
                 </ComboBox>
-                <Button mnemonicParsing="false" text="Iniciar Programa" />
+                <Button mnemonicParsing="false" onAction="#iniciar" text="Iniciar Programa" />
               </children>
             </VBox>
           </children>
@@ -42,8 +38,8 @@
         </HBox>
         <HBox alignment="CENTER" prefHeight="127.45095825195312" prefWidth="500.0" spacing="10.0">
           <children>
-            <Button mnemonicParsing="false" text="Novo Programa" />
-            <Button mnemonicParsing="false" text="Novo Radialista" />
+            <Button mnemonicParsing="false" onAction="#cadastrarPrograma" text="Novo Programa" />
+            <Button mnemonicParsing="false" onAction="#cadastrarRadialista" text="Novo Radialista" />
             <Button mnemonicParsing="false" text="Novo Cliente" />
             <Button mnemonicParsing="false" text="Nova Propaganda" />
           </children>

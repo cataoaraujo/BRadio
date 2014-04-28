@@ -96,6 +96,7 @@ public class RadialistaDAO extends GenericDAO<Radialista>{
             while (rs.next()) {
                 Radialista radialista = new Radialista();
                 radialista.setCodigo(rs.getInt("RAD_CODIGO"));
+                radialista.setNome(rs.getString("RAD_NOME"));
                 radialista.setCPF(rs.getString("RAD_CPF"));
                 radialista.setEndereco(rs.getString("RAD_ENDERECO"));
                 radialista.setInicio(rs.getDate("RAD_DATAINICIO"));
@@ -118,6 +119,7 @@ public class RadialistaDAO extends GenericDAO<Radialista>{
             while (rs.next()) {
                 radialista = new Radialista();
                 radialista.setCodigo(rs.getInt("RAD_CODIGO"));
+                radialista.setNome(rs.getString("RAD_NOME"));
                 radialista.setCPF(rs.getString("RAD_CPF"));
                 radialista.setEndereco(rs.getString("RAD_ENDERECO"));
                 radialista.setInicio(rs.getDate("RAD_DATAINICIO"));
