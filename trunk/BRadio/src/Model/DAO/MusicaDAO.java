@@ -8,10 +8,12 @@ package Model.DAO;
 
 import Model.Musica;
 import java.io.File;
+import java.security.MessageDigest;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
 
 /**
@@ -26,7 +28,7 @@ public class MusicaDAO extends GenericDAO<Musica>{
 
     @Override
     public boolean insert(Musica o) {
-        String sqlInsert = "INSERT INTO TB_MUSICA(MUS_TITULO, MUS_ARTISTA, MUS_GENERO, MUS_ALBUM, MUS_ARQUIVO) VALUES (?,?,?,?,?)";
+        String sqlInsert = "INSERT INTO TB_MUSICA(MUS_TITULO, MUS_ARTISTA, MUS_GENERO, MUS_ALBUM, MUS_ARQUIVO, MUS_HASH) VALUES (?,?,?,?,?,?)";
         try {
             PreparedStatement pStatement = conn.prepareStatement(sqlInsert, java.sql.Statement.RETURN_GENERATED_KEYS);
             pStatement.setString(1, o.getTitulo());
@@ -34,6 +36,7 @@ public class MusicaDAO extends GenericDAO<Musica>{
             pStatement.setString(3, o.getGenero());
             pStatement.setString(4, o.getAlbum());
             pStatement.setString(5, o.getArquivo().getAbsolutePath());
+            pStatement.setString(6, Arrays.toString(MessageDigest.getInstance("MD5").digest(o.getArquivo().getAbsolutePath().getBytes("UTF-8"))));
             
             if (pStatement.executeUpdate() > 0) {
                 ResultSet rs = pStatement.getGeneratedKeys();
@@ -44,7 +47,7 @@ public class MusicaDAO extends GenericDAO<Musica>{
             }
 
         } catch (Exception e) {
-            e.printStackTrace();
+            //e.printStackTrace();
         }
         return false;
     }

@@ -3,16 +3,23 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package Model;
 
 import java.io.File;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import org.farng.mp3.MP3File;
+import org.farng.mp3.TagException;
+import org.farng.mp3.id3.AbstractID3v2;
+import org.farng.mp3.id3.ID3v1;
 
 /**
  *
  * @author Rodrigo
  */
 public class Musica {
+
     private int codigo;
     private String titulo;
     private String artista;
@@ -70,5 +77,40 @@ public class Musica {
     public void setArquivo(File arquivo) {
         this.arquivo = arquivo;
     }
-    
+
+    public void getMetadata() {
+        try {
+            MP3File mp3file = new MP3File(this.getArquivo());
+            if (mp3file.hasID3v2Tag()) {
+                AbstractID3v2 tag = mp3file.getID3v2Tag();
+                artista = tag.getLeadArtist();
+                titulo = tag.getSongTitle();
+                genero = tag.getSongGenre();
+                album = tag.getAlbumTitle();
+            } else if (mp3file.hasID3v1Tag()) {
+                ID3v1 tag = mp3file.getID3v1Tag();
+                artista = tag.getArtist();
+                titulo = tag.getTitle();
+                genero = tag.getGenre() + "";
+                album = tag.getAlbum();
+            }
+            if (titulo==null) {
+                titulo = arquivo.getName();
+            }
+            if(artista==null){
+                artista = "Desconhecido";
+            }
+            if(album==null){
+                album = "Desconhecido";
+            }
+        } catch (IOException | TagException ex) {
+            Logger.getLogger(Musica.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    @Override
+    public String toString() {
+        return titulo + " - " + artista;
+    }
+
 }

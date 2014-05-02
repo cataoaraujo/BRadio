@@ -6,14 +6,18 @@
 package bradio;
 
 import Model.*;
+import Model.DAO.ConnectionFactory;
+import Model.DAO.MusicaDAO;
 import java.net.URL;
 import java.sql.Time;
 import java.util.ResourceBundle;
-import javafx.event.EventType;
+import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
+import javafx.scene.control.ProgressBar;
+import javafx.scene.control.TextField;
 import javafx.util.Callback;
 
 /**
@@ -39,13 +43,29 @@ class ListCellPropaganda extends ListCell<Propaganda> {
 
 public class PrincipalController implements Initializable {
 
-    public ListView<Propaganda> listaPropagandas = new ListView<Propaganda>();
+    private Player<Musica> playerMusica = new Player<Musica>();
+
+    public ListView<Propaganda> listaPropagandas = new ListView<>();
+    public ListView<Musica> listaMusicas = new ListView<>();
     public Label relogio = new Label();
     public Label data = new Label();
 
+    @FXML
+    public ListView<Musica> listaPlaylist;
+    @FXML
+    public TextField codigoSelecionada, tituloSelecionada, artistaSelecionada, albumSelecionada, generoSelecionada;
+    @FXML
+    public TextField codigoTocando, tituloTocando, artistaTocando, albumTocando, generoTocando;
+    @FXML
+    public ProgressBar progressoMusica = new ProgressBar(0);
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        Relogio r = new Relogio(relogio,data);
+        playerMusica.addProgressBar(progressoMusica);
+        Relogio r = new Relogio(relogio, data);
+        MusicaDAO md = new MusicaDAO(ConnectionFactory.getConnection());
+        listaMusicas.getItems().addAll(md.getAll());
+
         // TODO
         listaPropagandas.setCellFactory(new Callback<ListView<Propaganda>, ListCell<Propaganda>>() {
 
@@ -75,4 +95,59 @@ public class PrincipalController implements Initializable {
         listaPropagandas.getItems().add(new Propaganda("MUITAS OUTRA PROPAGANDAS", new Time(07, 35, 00)));
     }
 
+    public void selecionaMusica() {
+        if (listaMusicas.getSelectionModel().getSelectedItem() != null) {
+            Musica m = listaMusicas.getSelectionModel().getSelectedItem();
+            codigoSelecionada.setText(m.getCodigo() + "");
+            tituloSelecionada.setText(m.getTitulo());
+            generoSelecionada.setText(m.getGenero());
+            artistaSelecionada.setText(m.getArtista());
+            albumSelecionada.setText(m.getAlbum());
+        }
+    }
+
+    public void addPlaylist() {
+        if (listaMusicas.getSelectionModel().getSelectedItem() != null) {
+            Musica m = listaMusicas.getSelectionModel().getSelectedItem();
+            listaPlaylist.getItems().add(m);
+        }
+    }
+
+    public void tocarProxima() {
+        if (listaPlaylist.getSelectionModel().getSelectedItem() != null) {
+            Musica m = listaPlaylist.getSelectionModel().getSelectedItem();
+            listaPlaylist.getItems().remove(listaPlaylist.getSelectionModel().getSelectedIndex());
+            playerMusica.setArquivo(m.getArquivo());
+            playerMusica.play();
+            setMusicaTocando(m);
+        } else {
+            if (listaPlaylist.getItems().size() > 0) {
+                Musica m = listaPlaylist.getItems().get(0);
+                listaPlaylist.getItems().remove(m);
+                playerMusica.setArquivo(m.getArquivo());
+                playerMusica.play();
+                setMusicaTocando(m);
+            }
+        }
+    }
+    
+    public void pararMusica(){
+        playerMusica.stop();
+    }
+
+    private void setMusicaTocando(Musica m) {
+        codigoTocando.setText(m.getCodigo() + "");
+        tituloTocando.setText(m.getTitulo());
+        generoTocando.setText(m.getGenero());
+        artistaTocando.setText(m.getArtista());
+        albumTocando.setText(m.getAlbum());
+        
+    }
+
+    public void removeMusica() {
+        if (listaPlaylist.getSelectionModel().getSelectedItem() != null) {
+            Musica m = listaPlaylist.getSelectionModel().getSelectedItem();
+            listaPlaylist.getItems().remove(m);
+        }
+    }
 }
