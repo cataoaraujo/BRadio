@@ -6,15 +6,16 @@
 package bradio;
 
 import Model.DAO.ConnectionFactory;
+import Model.DAO.MusicaDAO;
 import Model.DAO.ProgramaDAO;
+import Model.Musica;
 import Model.Programa;
-import Model.Radialista;
+import java.io.File;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ComboBox;
-import javafx.scene.control.ListView;
 
 /**
  * FXML Controller class
@@ -25,9 +26,8 @@ public class LoginController implements Initializable {
 
     @FXML
     ComboBox<Programa> cbProgramas;
-    
-    private static Programa programaAtual;
 
+    private static Programa programaAtual;
     /**
      * Initializes the controller class.
      */
@@ -45,7 +45,7 @@ public class LoginController implements Initializable {
         if (cbProgramas.getSelectionModel().getSelectedItem() != null) {
             programaAtual = cbProgramas.getSelectionModel().getSelectedItem();
             BRadio.getInstance().goToPrincipal();
-        }else{
+        } else {
             AlertDialog.show("Escolha um programa antes de iniciar.");
         }
     }
