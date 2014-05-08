@@ -24,9 +24,17 @@ import javafx.stage.StageStyle;
  */
 public class AlertDialog {
 
+    private static String mensagem = "";
+    private static final Stage dialog = new Stage(StageStyle.UNDECORATED);
+    private static Text label;
+    public static void setMensagem(String mensagem) {
+        AlertDialog.mensagem = mensagem;
+        label.setText(mensagem);
+    }
+    
     public static void show(String mensagem) {
-        final Stage dialog = new Stage(StageStyle.UNDECORATED);
-        Text label = new Text(mensagem);
+        AlertDialog.mensagem = mensagem;
+        label = new Text(mensagem);
         label.setFont(Font.font("Verdana", FontWeight.BOLD, 20));
         Button okButton = new Button("Ok");
         okButton.setOnAction(new EventHandler<ActionEvent>() {

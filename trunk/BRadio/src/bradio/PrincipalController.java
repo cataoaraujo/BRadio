@@ -115,11 +115,7 @@ public class PrincipalController implements Initializable {
 
     public void tocarProxima() {
         if (listaPlaylist.getSelectionModel().getSelectedItem() != null) {
-            Musica m = listaPlaylist.getSelectionModel().getSelectedItem();
-            listaPlaylist.getItems().remove(listaPlaylist.getSelectionModel().getSelectedIndex());
-            playerMusica.setArquivo(m.getArquivo());
-            playerMusica.play();
-            setMusicaTocando(m);
+            tocarSelecionada();
         } else {
             if (listaPlaylist.getItems().size() > 0) {
                 Musica m = listaPlaylist.getItems().get(0);
@@ -130,8 +126,19 @@ public class PrincipalController implements Initializable {
             }
         }
     }
-    
-    public void pararMusica(){
+
+    public void tocarSelecionada() {
+        if (listaPlaylist.getSelectionModel().getSelectedItem() != null) {
+            Musica m = listaPlaylist.getSelectionModel().getSelectedItem();
+            listaPlaylist.getItems().remove(listaPlaylist.getSelectionModel().getSelectedIndex());
+            playerMusica.setArquivo(m.getArquivo());
+            playerMusica.play();
+            setMusicaTocando(m);
+            listaPlaylist.getSelectionModel().selectFirst();
+        }
+    }
+
+    public void pararMusica() {
         playerMusica.stop();
     }
 
@@ -141,7 +148,7 @@ public class PrincipalController implements Initializable {
         generoTocando.setText(m.getGenero());
         artistaTocando.setText(m.getArtista());
         albumTocando.setText(m.getAlbum());
-        
+
     }
 
     public void removeMusica() {

@@ -8,13 +8,17 @@ package Model.DAO;
 
 import Model.Musica;
 import java.io.File;
+import java.io.UnsupportedEncodingException;
 import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.logging.Logger;
 
 /**
  *
@@ -46,7 +50,9 @@ public class MusicaDAO extends GenericDAO<Musica>{
                 return true;
             }
 
-        } catch (Exception e) {
+        } catch (UnsupportedEncodingException | NoSuchAlgorithmException | SQLException e) {
+            System.out.println(e);
+            Logger.getLogger(Musica.class.getName()).severe("Problema ao adicionar no Banco de Dados a música \""+o.getArquivo().getAbsolutePath()+"\" ");
             //e.printStackTrace();
         }
         return false;
