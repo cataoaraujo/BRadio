@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.paint.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="159.0" prefWidth="300.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="bradio.CadastroVinheta">
+  <children>
+    <VBox layoutX="0.0" layoutY="0.0" prefHeight="159.0" prefWidth="300.0">
+      <children>
+        <HBox prefHeight="38.0" prefWidth="484.0">
+          <children>
+            <Label prefHeight="64.0" prefWidth="485.0" text="Cadastro de Vinheta">
+              <font>
+                <Font name="System Bold" size="16.0" />
+              </font>
+            </Label>
+          </children>
+        </HBox>
+        <HBox prefHeight="32.0" prefWidth="484.0">
+          <children>
+            <Label prefHeight="24.0" prefWidth="116.0" text="Nome:" />
+            <TextField fx:id="edtNome" />
+          </children>
+        </HBox>
+        <HBox prefHeight="32.0" prefWidth="484.0">
+          <children>
+            <Label prefHeight="24.0" prefWidth="116.0" text="Arquivo:" />
+            <Button fx:id="btArquivo" mnemonicParsing="false" onAction="#escolherArquivo" prefWidth="145.0" text="Selecionar" />
+          </children>
+        </HBox>
+        <HBox prefHeight="42.0" prefWidth="293.0">
+          <children>
+            <Button mnemonicParsing="false" onAction="#cadastrar" prefHeight="25.0" prefWidth="296.0" text="Cadastrar" />
+          </children>
+        </HBox>
+        <HBox prefHeight="36.0" prefWidth="282.0">
+          <children>
+            <Button mnemonicParsing="false" onAction="#voltar" prefHeight="25.0" prefWidth="296.0" text="Voltar" />
+          </children>
+        </HBox>
+      </children>
+    </VBox>
+  </children>
+</AnchorPane>

@@ -8,11 +8,14 @@ package bradio;
 import Model.*;
 import Model.DAO.ConnectionFactory;
 import Model.DAO.MusicaDAO;
+import Model.DAO.VinhetaDAO;
 import java.net.URL;
 import java.sql.Time;
 import java.util.ResourceBundle;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
@@ -44,6 +47,7 @@ class ListCellPropaganda extends ListCell<Propaganda> {
 public class PrincipalController implements Initializable {
 
     private Player<Musica> playerMusica = new Player<Musica>();
+    private Player<Vinheta> playerVinheta = new Player<Vinheta>();
 
     public ListView<Propaganda> listaPropagandas = new ListView<>();
     public ListView<Musica> listaMusicas = new ListView<>();
@@ -57,7 +61,15 @@ public class PrincipalController implements Initializable {
     @FXML
     public TextField codigoTocando, tituloTocando, artistaTocando, albumTocando, generoTocando;
     @FXML
-    public ProgressBar progressoMusica = new ProgressBar(0);
+    public ProgressBar progressoMusica = new ProgressBar(0), progressoVinheta = new ProgressBar(0);
+
+    // Para tocar Vinhetas
+    @FXML
+    public Button Play1, Play2, Play3, Play4, Play5, Play6;
+    @FXML
+    public TextField vinheta1, vinheta2, vinheta3, vinheta4, vinheta5, vinheta6;
+    @FXML
+    public Label ultimaPropVin;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -156,5 +168,32 @@ public class PrincipalController implements Initializable {
             Musica m = listaPlaylist.getSelectionModel().getSelectedItem();
             listaPlaylist.getItems().remove(m);
         }
+    }
+
+    public void tocarVinheta(ActionEvent ae) {
+        Button b = (Button) ae.getSource();
+        Vinheta v = new Vinheta();
+        if (b.equals(Play1)) {
+            v.setNome(vinheta1.getText());
+        } else if (b.equals(Play2)) {
+            v.setNome(vinheta2.getText());
+        } else if (b.equals(Play3)) {
+            v.setNome(vinheta3.getText());
+        } else if (b.equals(Play4)) {
+            v.setNome(vinheta4.getText());
+        } else if (b.equals(Play5)) {
+            v.setNome(vinheta5.getText());
+        } else if (b.equals(Play6)) {
+            v.setNome(vinheta6.getText());
+        }
+        VinhetaDAO vd = new VinhetaDAO(ConnectionFactory.getConnection());
+        v = vd.getByNome(v.getNome());
+        if (v != null) {
+            playerVinheta.setArquivo(v.getArquivo());
+            playerVinheta.addProgressBar(progressoVinheta);
+            playerVinheta.play();
+            ultimaPropVin.setText(v.getNome());
+        }
+
     }
 }

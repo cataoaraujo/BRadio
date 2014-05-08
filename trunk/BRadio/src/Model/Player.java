@@ -62,7 +62,9 @@ public class Player<T> {
             Media media = new Media(source);
             mediaPlayer = new MediaPlayer(media);
             mediaPlayer.play();
-            atualizaProgressBar();
+            if (this.pb != null) {
+                atualizaProgressBar();
+            }
             this.estado = EstadoPlayer.Tocando;
             return true;
         } else {
