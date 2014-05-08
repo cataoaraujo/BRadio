@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="429.0" prefWidth="590.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bradio.CadastroPropagandaController">
+<children><VBox layoutX="8.0" layoutY="7.0" prefHeight="143.0" prefWidth="298.0">
+<children><HBox prefHeight="32.0" prefWidth="583.0">
+<children><Label prefHeight="33.0" prefWidth="208.0" text="Nova propaganda">
+<font>
+<Font name="System Bold" size="16.0" />
+</font></Label>
+</children></HBox><HBox prefHeight="34.0" prefWidth="583.0">
+<children><Label prefHeight="23.0" prefWidth="90.0" text="Cliente:" /><ComboBox fx:id="cbClientes" prefHeight="25.0" prefWidth="192.0" />
+</children></HBox>
+<HBox layoutX="10.0" layoutY="42.0" prefHeight="34.0" prefWidth="583.0">
+<children>
+<Label prefHeight="23.0" prefWidth="90.0" text="Nome:" /><TextField fx:id="edtNome" prefHeight="25.0" prefWidth="191.0" />
+</children>
+</HBox>
+<HBox layoutX="10.0" layoutY="76.0" prefHeight="34.0" prefWidth="583.0">
+<children>
+<Label prefHeight="23.0" prefWidth="90.0" text="Arquivo:" /><Button mnemonicParsing="false" onAction="#abrir" text="Abrir" />
+<TextField fx:id="edtAbrir" editable="false" />
+</children>
+</HBox>
+<HBox layoutX="10.0" layoutY="110.0" prefHeight="34.0" prefWidth="583.0">
+<children><Label text="Dias:">
+<font>
+<Font name="System Bold" size="12.0" />
+</font>
+</Label>
+</children>
+</HBox>
+</children></VBox><VBox layoutX="7.0" layoutY="150.0" prefHeight="279.0" prefWidth="298.0">
+<children><HBox prefHeight="177.0" prefWidth="298.0">
+<children><ListView fx:id="listaDias" prefHeight="172.0" prefWidth="300.0" />
+</children></HBox><HBox prefHeight="25.0" prefWidth="298.0" /><HBox prefHeight="19.0" prefWidth="298.0">
+<children>
+<Button mnemonicParsing="false" onAction="#cadastrar" prefHeight="25.0" prefWidth="299.0" text="Adicionar Propaganda" />
+</children></HBox>
+<HBox layoutX="10.0" layoutY="249.0" prefHeight="31.0" prefWidth="298.0">
+<children>
+<Button mnemonicParsing="false" onAction="#voltar" prefHeight="25.0" prefWidth="299.0" text="Voltar" />
+</children>
+</HBox>
+<HBox layoutX="10.0" layoutY="187.0" prefHeight="39.0" prefWidth="298.0" />
+</children></VBox><VBox layoutX="317.0" layoutY="32.0" prefHeight="359.0" prefWidth="266.0">
+<children><HBox prefHeight="26.0" prefWidth="266.0">
+<children><Label text="Horários:">
+<font>
+<Font name="System Bold" size="12.0" />
+</font></Label>
+</children></HBox><HBox prefHeight="341.0" prefWidth="266.0">
+<children><TableView fx:id="tabelaHorarios" prefHeight="340.0" prefWidth="269.0">
+  <columns>
+    <TableColumn editable="false" prefWidth="75.0" text="C1" />
+    <TableColumn prefWidth="190.0" text="C2" />
+  </columns>
+</TableView>
+</children></HBox>
+</children></VBox>
+</children></AnchorPane>

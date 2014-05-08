@@ -2,15 +2,13 @@
 
 <?import java.lang.*?>
 <?import java.net.*?>
-<?import java.util.*?>
 <?import javafx.collections.*?>
 <?import javafx.geometry.*?>
-<?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane id="AnchorPane" prefHeight="256.0" prefWidth="500.0" style="-fx-background-color: #000" styleClass="null" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="bradio.LoginController">
+<AnchorPane id="AnchorPane" prefHeight="256.0" prefWidth="500.0" style="-fx-background-color: #000" styleClass="null" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bradio.LoginController">
   <children>
     <VBox layoutX="0.0" layoutY="0.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="256.0" prefWidth="500.0" style="-fx-background-color: #000;">
       <children>
@@ -40,8 +38,8 @@
           <children>
             <Button mnemonicParsing="false" onAction="#cadastrarPrograma" text="Novo Programa" />
             <Button mnemonicParsing="false" onAction="#cadastrarRadialista" text="Novo Radialista" />
-            <Button mnemonicParsing="false" text="Novo Cliente" />
-            <Button mnemonicParsing="false" text="Nova Propaganda" />
+            <Button mnemonicParsing="false" onAction="#cadastrarCliente" text="Novo Cliente" />
+            <Button mnemonicParsing="false" onAction="#cadastrarPropaganda" text="Nova Propaganda" />
           </children>
         </HBox>
         <HBox alignment="CENTER" prefHeight="21.0" prefWidth="500.0">
