@@ -5,6 +5,7 @@
  */
 package bradio;
 
+import Model.Login;
 import insidefx.undecorator.Undecorator;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -35,6 +36,7 @@ public class BRadio extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
+        Login login = Login.getInstance();
         stage = primaryStage;
         goToLogin();
         stage.show();
@@ -67,6 +69,28 @@ public class BRadio extends Application {
         try {
             replaceSceneContent("CadastroPrograma.fxml");
         } catch (Exception ex) {
+            
+        }
+    }
+    public void goToCadastroCliente(){
+        try{
+            replaceSceneContent("CadastroCliente.fxml");
+        }catch(Exception e){
+            
+        }
+    }
+    
+    public void goToCadastroPropaganda(){
+        try{
+            replaceSceneContent("CadastroPropaganda.fxml");
+        }catch(Exception e){
+            
+        }
+    }
+    public void goToCadastroHorariosPropaganda(){
+        try{
+            replaceSceneContent("CadastroHorariosPropaganda.fxml");
+        }catch(Exception e){
             
         }
     }

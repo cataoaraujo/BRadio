@@ -57,5 +57,11 @@ public class LoginController implements Initializable {
     public void cadastrarPrograma() {
         BRadio.getInstance().goToCadastroPrograma();
     }
-
+    
+    public void cadastrarCliente(){
+        BRadio.getInstance().goToCadastroCliente();
+    }
+    public void cadastrarPropaganda(){
+        BRadio.getInstance().goToCadastroPropaganda();
+    }
 }

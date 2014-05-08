@@ -17,7 +17,7 @@ public class ConnectionFactory {
     private static String db = "BRadio";
     private static String url = "jdbc:mysql://" + serverName + "/" + db;
     private static String usuario = "root";
-    private static String senha = "1234";
+    private static String senha = "";
     
     public static Connection getConnection() {
         try {
