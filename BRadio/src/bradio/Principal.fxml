@@ -166,7 +166,16 @@
                                 </Button>
                               </children>
                             </HBox>
-                            <ListView fx:id="listaPlaylist" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="150.0" prefWidth="425.0" VBox.vgrow="ALWAYS" />
+                            <ListView fx:id="listaPlaylist" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="150.0" prefWidth="425.0" VBox.vgrow="ALWAYS">
+                              <contextMenu>
+                                <ContextMenu>
+                                  <items>
+                                    <MenuItem mnemonicParsing="false" onAction="#tocarProxima" text="Tocar" />
+                                    <MenuItem mnemonicParsing="false" onAction="#removeMusica" text="Remover" />
+                                  </items>
+                                </ContextMenu>
+                              </contextMenu>
+                            </ListView>
                             <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#removeMusica" prefWidth="425.0" text="Remover Selecionada" VBox.vgrow="ALWAYS" />
                           </children>
                           <padding>

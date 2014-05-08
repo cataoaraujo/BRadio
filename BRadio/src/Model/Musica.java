@@ -94,17 +94,28 @@ public class Musica {
                 genero = tag.getGenre() + "";
                 album = tag.getAlbum();
             }
-            if (titulo==null) {
+
+        } catch (IOException | TagException ex) {
+            Logger.getLogger(Musica.class.getName()).severe("Problema ao coletar dados da música \"" + this.getArquivo().getAbsolutePath() + "\" ");
+            //Logger.getLogger(Musica.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            if (titulo == null) {
                 titulo = arquivo.getName();
+            } else {
+                if (titulo.isEmpty()) {
+                    titulo = arquivo.getName();
+                }
             }
-            if(artista==null){
+            if (artista == null) {
                 artista = "Desconhecido";
+            } else {
+                if (artista.isEmpty()) {
+                    artista = "Desconhecido";
+                }
             }
-            if(album==null){
+            if (album == null) {
                 album = "Desconhecido";
             }
-        } catch (IOException | TagException ex) {
-            Logger.getLogger(Musica.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
