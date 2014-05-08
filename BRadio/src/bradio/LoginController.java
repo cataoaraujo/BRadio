@@ -68,13 +68,19 @@ public class LoginController implements Initializable {
     public void cadastrarPrograma() {
         BRadio.getInstance().goToCadastroPrograma();
     }
-    
-    public void cadastrarCliente(){
+
+    public void cadastrarCliente() {
         BRadio.getInstance().goToCadastroCliente();
     }
-    public void cadastrarPropaganda(){
+
+    public void cadastrarPropaganda() {
         BRadio.getInstance().goToCadastroPropaganda();
     }
+
+    public void cadastrarVinheta() {
+        BRadio.getInstance().goToCadastroVinheta();
+    }
+
     public void cadastrarMusicas() {
         DirectoryChooser dc = new DirectoryChooser();
         File diretorio = dc.showDialog(new Stage());
@@ -92,7 +98,7 @@ public class LoginController implements Initializable {
                         Musica m = new Musica();
                         m.setArquivo(file);
                         m.getMetadata();
-                        if(!musicaDao.insert(m)){
+                        if (!musicaDao.insert(m)) {
                             erros++;
                         }
                         progresso.setProgress(1.0 * (total - i) / total);

@@ -129,8 +129,8 @@
                                     <Font name="System Bold" size="16.0" fx:id="x2" />
                                   </font>
                                 </Label>
-                                <ProgressBar maxHeight="-Infinity" maxWidth="1.7976931348623157E308" prefHeight="50.0" prefWidth="340.0" progress="1.0" VBox.vgrow="ALWAYS" />
-                                <Label alignment="CENTER" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" prefHeight="27.0" prefWidth="340.0" text="Nome da Propaganda/Vinheta" textFill="WHITE" VBox.vgrow="ALWAYS" />
+                                <ProgressBar fx:id="progressoVinheta" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" prefHeight="50.0" prefWidth="340.0" progress="1.0" VBox.vgrow="ALWAYS" />
+                                <Label fx:id="ultimaPropVin" alignment="CENTER" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" prefHeight="27.0" prefWidth="340.0" text="Nome da Propaganda/Vinheta" textFill="WHITE" VBox.vgrow="ALWAYS" />
                               </children>
                               <padding>
                                 <Insets bottom="5.0" left="5.0" right="5.0" fx:id="x3" />
@@ -198,20 +198,20 @@
                                   <children>
                                     <HBox maxHeight="-Infinity" maxWidth="1.7976931348623157E308" minHeight="19.0" prefHeight="19.0" prefWidth="165.0" VBox.vgrow="ALWAYS">
                                       <children>
-                                        <TextField maxHeight="-Infinity" maxWidth="1.7976931348623157E308" prefWidth="87.0" promptText="Vinheta" HBox.hgrow="ALWAYS" />
-                                        <Button maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" text="Play" HBox.hgrow="ALWAYS" />
+                                        <TextField fx:id="vinheta1" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" prefWidth="87.0" promptText="Vinheta" HBox.hgrow="ALWAYS" />
+                                        <Button id="v1" fx:id="Play1" maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" onAction="#tocarVinheta" text="Play" HBox.hgrow="ALWAYS" />
                                       </children>
                                     </HBox>
                                     <HBox maxHeight="-Infinity" maxWidth="1.7976931348623157E308" minHeight="19.0" prefHeight="19.0" prefWidth="165.0" VBox.vgrow="ALWAYS">
                                       <children>
-                                        <TextField maxHeight="-Infinity" maxWidth="1.7976931348623157E308" prefWidth="87.0" promptText="Vinheta" HBox.hgrow="ALWAYS" />
-                                        <Button maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" text="Play" HBox.hgrow="ALWAYS" />
+                                        <TextField fx:id="vinheta2" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" prefWidth="87.0" promptText="Vinheta" HBox.hgrow="ALWAYS" />
+                                        <Button fx:id="Play2" maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" onAction="#tocarVinheta" text="Play" HBox.hgrow="ALWAYS" />
                                       </children>
                                     </HBox>
                                     <HBox maxHeight="-Infinity" maxWidth="1.7976931348623157E308" minHeight="19.0" prefHeight="19.0" prefWidth="165.0" VBox.vgrow="ALWAYS">
                                       <children>
-                                        <TextField maxHeight="-Infinity" maxWidth="1.7976931348623157E308" prefWidth="87.0" promptText="Vinheta" HBox.hgrow="ALWAYS" />
-                                        <Button maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" text="Play" HBox.hgrow="ALWAYS" />
+                                        <TextField fx:id="vinheta3" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" prefWidth="87.0" promptText="Vinheta" HBox.hgrow="ALWAYS" />
+                                        <Button fx:id="Play3" maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" onAction="#tocarVinheta" text="Play" HBox.hgrow="ALWAYS" />
                                       </children>
                                     </HBox>
                                   </children>
@@ -223,8 +223,8 @@
                                   <children>
                                     <HBox maxHeight="-Infinity" maxWidth="1.7976931348623157E308" minHeight="19.0" prefHeight="19.0" prefWidth="165.0" VBox.vgrow="ALWAYS">
                                       <children>
-                                        <TextField maxHeight="-Infinity" maxWidth="1.7976931348623157E308" prefWidth="87.0" promptText="Vinheta" HBox.hgrow="ALWAYS" />
-                                        <Button maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" text="Play" HBox.hgrow="ALWAYS">
+                                        <TextField fx:id="vinheta4" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" prefWidth="87.0" promptText="Vinheta" HBox.hgrow="ALWAYS" />
+                                        <Button fx:id="Play4" maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" onAction="#tocarVinheta" text="Play" HBox.hgrow="ALWAYS">
                                           <HBox.margin>
                                             <Insets fx:id="x1" />
                                           </HBox.margin>
@@ -233,14 +233,14 @@
                                     </HBox>
                                     <HBox maxHeight="-Infinity" maxWidth="1.7976931348623157E308" minHeight="19.0" prefHeight="19.0" prefWidth="165.0" VBox.vgrow="ALWAYS">
                                       <children>
-                                        <TextField maxHeight="-Infinity" maxWidth="1.7976931348623157E308" prefWidth="87.0" promptText="Vinheta" HBox.hgrow="ALWAYS" />
-                                        <Button maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" text="Play" HBox.hgrow="ALWAYS" />
+                                        <TextField fx:id="vinheta5" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" prefWidth="87.0" promptText="Vinheta" HBox.hgrow="ALWAYS" />
+                                        <Button fx:id="Play5" maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" onAction="#tocarVinheta" text="Play" HBox.hgrow="ALWAYS" />
                                       </children>
                                     </HBox>
                                     <HBox maxHeight="-Infinity" maxWidth="1.7976931348623157E308" minHeight="19.0" prefHeight="19.0" prefWidth="165.0" VBox.vgrow="ALWAYS">
                                       <children>
-                                        <TextField maxHeight="-Infinity" maxWidth="1.7976931348623157E308" prefWidth="87.0" promptText="Vinheta" HBox.hgrow="ALWAYS" />
-                                        <Button maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" text="Play" HBox.hgrow="ALWAYS" />
+                                        <TextField fx:id="vinheta6" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" prefWidth="87.0" promptText="Vinheta" HBox.hgrow="ALWAYS" />
+                                        <Button fx:id="Play6" maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" onAction="#tocarVinheta" text="Play" HBox.hgrow="ALWAYS" />
                                       </children>
                                     </HBox>
                                   </children>

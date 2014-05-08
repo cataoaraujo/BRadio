@@ -57,41 +57,52 @@ public class BRadio extends Application {
             System.out.println("erro: ProjetoFinal.goToPrincipal");
         }
     }
-    
+
     public void goToCadastroRadialista() {
         try {
             replaceSceneContent("cadastroRadialista.fxml");
         } catch (Exception ex) {
-            
+
         }
     }
+
     public void goToCadastroPrograma() {
         try {
             replaceSceneContent("CadastroPrograma.fxml");
         } catch (Exception ex) {
-            
+
         }
     }
-    public void goToCadastroCliente(){
-        try{
+
+    public void goToCadastroCliente() {
+        try {
             replaceSceneContent("CadastroCliente.fxml");
-        }catch(Exception e){
-            
+        } catch (Exception e) {
+
         }
     }
-    
-    public void goToCadastroPropaganda(){
-        try{
+
+    public void goToCadastroVinheta() {
+        try {
+            replaceSceneContent("CadastroVinheta.fxml");
+        } catch (Exception e) {
+
+        }
+    }
+
+    public void goToCadastroPropaganda() {
+        try {
             replaceSceneContent("CadastroPropaganda.fxml");
-        }catch(Exception e){
-            
+        } catch (Exception e) {
+
         }
     }
-    public void goToCadastroHorariosPropaganda(){
-        try{
+
+    public void goToCadastroHorariosPropaganda() {
+        try {
             replaceSceneContent("CadastroHorariosPropaganda.fxml");
-        }catch(Exception e){
-            
+        } catch (Exception e) {
+
         }
     }
 
