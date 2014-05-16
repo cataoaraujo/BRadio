@@ -36,17 +36,14 @@
 </HBox>
 </children></VBox><VBox layoutX="8.0" layoutY="150.0" prefHeight="93.0" prefWidth="298.0">
 <children><HBox prefHeight="32.0" prefWidth="298.0">
-<children><Label prefHeight="24.0" prefWidth="92.0" text="Inicio:" /><DatePicker fx:id="dataInicio" />
+<children><Label prefHeight="24.0" prefWidth="92.0" text="Inicio:" /><DatePicker fx:id="dataInicio" onAction="#addHorarios" />
 </children></HBox>
 <HBox layoutX="10.0" layoutY="10.0" prefHeight="28.0" prefWidth="298.0">
 <children>
 <Label prefHeight="24.0" prefWidth="92.0" text="Fim:" />
-<DatePicker fx:id="dataFim" />
+<DatePicker fx:id="dataFim" onAction="#addHorarios" />
 </children>
 </HBox>
-<HBox layoutX="10.0" layoutY="187.0" prefHeight="17.0" prefWidth="298.0">
-<children><Button layoutX="14.0" layoutY="391.0" mnemonicParsing="false" onAction="#addHorarios" text="Adicionar horarios" />
-</children></HBox>
 </children></VBox><VBox layoutX="317.0" layoutY="32.0" prefHeight="441.0" prefWidth="266.0">
 <children><HBox prefHeight="26.0" prefWidth="266.0">
 <children><Label text="Horários:">
@@ -54,12 +51,7 @@
 <Font name="System Bold" size="12.0" />
 </font></Label>
 </children></HBox><HBox prefHeight="416.0" prefWidth="266.0">
-<children><TableView fx:id="tabelaHorarios" prefHeight="378.0" prefWidth="266.0">
-  <columns>
-    <TableColumn editable="false" prefWidth="75.0" text="C1" />
-    <TableColumn prefWidth="190.0" text="C2" />
-  </columns>
-</TableView>
+<children><ListView fx:id="listaHorarios" prefHeight="416.0" prefWidth="269.0" />
 </children></HBox>
 </children></VBox>
 <Button layoutX="12.0" layoutY="414.0" mnemonicParsing="false" onAction="#cadastrar" prefHeight="25.0" prefWidth="299.0" text="Adicionar Propaganda" />

@@ -8,12 +8,12 @@ package Model.DAO;
 import Model.Propaganda;
 import java.io.File;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Time;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Date;
 
 /**
  *
@@ -38,6 +38,23 @@ public class PropagandaDAO extends GenericDAO<Propaganda> {
                 if (rs.next()) {
                     o.setCodigo(rs.getInt(1));
                 }
+                return true;
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+    public boolean insertNewHorario(Propaganda o) {
+        String sqlInsert = "INSERT INTO TB_DIASPROPAGANDAS(DIP_CODPROPAGANDA,DIP_DATA,DIP_HORARIOPREVISTO) VALUES (?, ?, ?)";
+        try {
+            PreparedStatement pS = conn.prepareStatement(sqlInsert, java.sql.Statement.RETURN_GENERATED_KEYS);
+            pS.setInt(1, o.getCodigo());
+            pS.setDate(2, Date.valueOf(o.getData()));
+            pS.setTime(3, Time.valueOf(o.getHora()));
+            if (pS.executeUpdate() > 0) {
                 return true;
             }
 
@@ -104,7 +121,7 @@ public class PropagandaDAO extends GenericDAO<Propaganda> {
         }
         return propagandas;
     }
-    
+
     public Propaganda getByCodigo(int codigo) {
         String sqlGetAll = "SELECT * FROM TB_PROPAGANDA WHERE PRO_CODIGO=?";
         try {
@@ -126,8 +143,14 @@ public class PropagandaDAO extends GenericDAO<Propaganda> {
         }
         return null;
     }
-    public Propaganda getByDia(Date data) {
-        String sqlGetAll = "SELECT * FROM tb_diaspropagandas WHERE DIP_DATA =?";
+
+    /**
+     * Retornar as Propagadas que ainda NÃO foram tocadas
+     * @param data
+     * @return 
+     */
+    public Collection<Propaganda> getByDia(Date data) {
+        String sqlGetAll = "SELECT * FROM tb_diaspropagandas WHERE DIP_DATA =? and DIP_TOCADA is null";
         Collection<Propaganda> propagandas = new ArrayList<>();
         try {
             PreparedStatement pStatement = conn.prepareStatement(sqlGetAll);
@@ -135,15 +158,31 @@ public class PropagandaDAO extends GenericDAO<Propaganda> {
             ResultSet rs = pStatement.executeQuery();
             while (rs.next()) {
                 Propaganda propaganda = getByCodigo(rs.getInt("DIP_CODPROPAGANDA"));
-                propaganda.setHorarios(rs.getTime("DIP_HORARIOPREVISTO"));
-                propaganda.setData(rs.getDate("DIP_DATA"));
-                return propaganda;
+                propaganda.setHora(rs.getTime("DIP_HORARIOPREVISTO").toLocalTime());
+                propaganda.setData(rs.getDate("DIP_DATA").toLocalDate());
+                propagandas.add(propaganda);
             }
         } catch (Exception e) {
             //who cares?
         }
-        return null;
+        return propagandas;
     }
+    
+    public boolean tocou(Propaganda o) {
+        String sqlInsert = "UPDATE tb_diaspropagandas SET DIP_TOCADA=now() WHERE DIP_DATA=? AND DIP_HORARIOPREVISTO=? AND DIP_CODPROPAGANDA=?";
+        try {
+            PreparedStatement pStatement = conn.prepareStatement(sqlInsert);
+            pStatement.setDate(1, Date.valueOf(o.getData()));
+            pStatement.setTime(2, Time.valueOf(o.getHora()));
+            pStatement.setInt(3, o.getCodigo());
+            if (pStatement.executeUpdate() > 0) {
+                return true;
+            }
 
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
 
 }

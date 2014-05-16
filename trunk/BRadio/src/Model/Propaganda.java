@@ -3,12 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package Model;
 
 import java.io.File;
-import java.sql.Time;
-import java.util.ArrayList;
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.Date;
 
 /**
@@ -16,22 +15,23 @@ import java.util.Date;
  * @author Rodrigo
  */
 public class Propaganda {
+
     private int codigo;
     private String nome;
-    private Date data;
+    private LocalDate data;
     private File arquivo;
     private Cliente cliente;
-    private Time horarios;
+    private LocalTime hora;
     private boolean ativa;
 
     public Propaganda() {
     }
 
-    public Propaganda(String nome, Time hora) {
+    public Propaganda(String nome, LocalTime hora) {
         this.nome = nome;
+        this.hora = hora;
     }
 
-    
     public int getCodigo() {
         return codigo;
     }
@@ -48,11 +48,11 @@ public class Propaganda {
         this.nome = nome;
     }
 
-    public Date getData() {
+    public LocalDate getData() {
         return data;
     }
 
-    public void setData(Date data) {
+    public void setData(LocalDate data) {
         this.data = data;
     }
 
@@ -72,12 +72,12 @@ public class Propaganda {
         this.cliente = cliente;
     }
 
-    public Time getHorarios() {
-        return horarios;
+    public LocalTime getHora() {
+        return hora;
     }
 
-    public void setHorarios(Time horarios) {
-        this.horarios = horarios;
+    public void setHora(LocalTime hora) {
+        this.hora = hora;
     }
 
     public boolean isAtiva() {
@@ -88,12 +88,9 @@ public class Propaganda {
         this.ativa = ativa;
     }
 
-   
-
     @Override
     public String toString() {
         return nome;
     }
-    
-    
+
 }
