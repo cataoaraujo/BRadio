@@ -10,15 +10,11 @@ import Model.DAO.ProgramaDAO;
 import Model.DAO.RadialistaDAO;
 import Model.Programa;
 import Model.Radialista;
-import com.sun.org.apache.bcel.internal.generic.AALOAD;
 import java.net.URL;
 import java.sql.Time;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.ResourceBundle;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
-import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ComboBox;
@@ -41,21 +37,20 @@ public class CadastroProgramaController implements Initializable {
 
     /**
      * Initializes the controller class.
+     * @param url
+     * @param rb
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         cbRadialistas.getItems().clear();
         RadialistaDAO rd = new RadialistaDAO(ConnectionFactory.getConnection());
         Collection<Radialista> radialistas = rd.getAll();
-
-        //System.out.println(radialistas);
         cbRadialistas.getItems().addAll(radialistas);
     }
 
     public void addRadialista() {
         if (cbRadialistas.getSelectionModel().getSelectedItem() != null) {
             Radialista radialista = cbRadialistas.getSelectionModel().getSelectedItem();
-            //System.out.println(radialista);
             listaRadialitas.getItems().add(radialista);
             cbRadialistas.getItems().remove(radialista);
         }else{

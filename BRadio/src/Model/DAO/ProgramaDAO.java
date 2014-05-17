@@ -5,11 +5,13 @@
  */
 package Model.DAO;
 
+import Model.Logger.GeradorLog;
 import Model.Programa;
 import Model.Radialista;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Collection;
 
@@ -47,8 +49,8 @@ public class ProgramaDAO extends GenericDAO<Programa> {
                     }
                 }
             }
-        } catch (Exception e) {
-            e.printStackTrace();
+        } catch (SQLException e) {
+            GeradorLog.getLoggerFull().severe(e.toString());
         }
         return false;
     }
@@ -64,8 +66,8 @@ public class ProgramaDAO extends GenericDAO<Programa> {
             if (pStatement.executeUpdate() > 0) {
                 return true;
             }
-        } catch (Exception e) {
-            e.printStackTrace();
+        } catch (SQLException e) {
+            GeradorLog.getLoggerFull().severe(e.toString());
         }
         return false;
     }
@@ -83,8 +85,8 @@ public class ProgramaDAO extends GenericDAO<Programa> {
                 }
             }
             return true;
-        } catch (Exception e) {
-            e.printStackTrace();
+        } catch (SQLException e) {
+            GeradorLog.getLoggerFull().severe(e.toString());
         }
         return false;
     }
@@ -106,15 +108,15 @@ public class ProgramaDAO extends GenericDAO<Programa> {
                 programas.add(programa);
             }
             return programas;
-        } catch (Exception e) {
-            e.printStackTrace();
+        } catch (SQLException e) {
+            GeradorLog.getLoggerFull().severe(e.toString());
         }
         return null;
     }
-    
-    public ArrayList<Radialista> getRadialistas(Programa o){
+
+    public ArrayList<Radialista> getRadialistas(Programa o) {
         ArrayList<Radialista> radialistas = new ArrayList<>();
-        String sql = "SELECT RAP_CODRADIALISTA FROM tb_radialista, tb_programa, tb_radialistaprograma WHERE PROG_CODIGO = "+o.getCodigo()+" AND RAP_CODPROGRAMA = PROG_CODIGO AND RAP_CODRADIALISTA = RAD_CODIGO";
+        String sql = "SELECT RAP_CODRADIALISTA FROM tb_radialista, tb_programa, tb_radialistaprograma WHERE PROG_CODIGO = " + o.getCodigo() + " AND RAP_CODPROGRAMA = PROG_CODIGO AND RAP_CODRADIALISTA = RAD_CODIGO";
         try {
             PreparedStatement pStatement = conn.prepareStatement(sql);
             ResultSet rs = pStatement.executeQuery();
@@ -123,13 +125,13 @@ public class ProgramaDAO extends GenericDAO<Programa> {
                 Radialista radialista = rad.getByCodigo(rs.getInt("RAP_CODRADIALISTA"));
                 radialistas.add(radialista);
             }
-        }catch(Exception e){
-            
+        } catch (SQLException e) {
+            GeradorLog.getLoggerFull().severe(e.toString());
         }
         return radialistas;
     }
-    
-    public Programa getByCodigo(int codigo){
+
+    public Programa getByCodigo(int codigo) {
         String sql = "SELECT * FROM tb_programa WHERE PROG_CODIGO=" + codigo;
         try {
             PreparedStatement pStatement = conn.prepareStatement(sql);
@@ -143,8 +145,8 @@ public class ProgramaDAO extends GenericDAO<Programa> {
                 programa.setRadialistas(getRadialistas(programa));
                 return programa;
             }
-        } catch (Exception e) {
-            e.printStackTrace();
+        } catch (SQLException e) {
+            GeradorLog.getLoggerFull().severe(e.toString());
         }
         return null;
     }

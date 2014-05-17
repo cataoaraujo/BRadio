@@ -6,6 +6,7 @@
 
 package Model.DAO;
 
+import Model.Logger.GeradorLog;
 import Model.Musica;
 import java.io.File;
 import java.io.UnsupportedEncodingException;
@@ -18,7 +19,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
-import java.util.logging.Logger;
 
 /**
  *
@@ -51,9 +51,7 @@ public class MusicaDAO extends GenericDAO<Musica>{
             }
 
         } catch (UnsupportedEncodingException | NoSuchAlgorithmException | SQLException e) {
-            System.out.println(e);
-            Logger.getLogger(Musica.class.getName()).severe("Problema ao adicionar no Banco de Dados a música \""+o.getArquivo().getAbsolutePath()+"\" ");
-            //e.printStackTrace();
+            GeradorLog.getLoggerFull().severe("Problema ao adicionar no Banco de Dados a música \""+o.getArquivo().getAbsolutePath()+"\" ");
         }
         return false;
     }
@@ -73,8 +71,8 @@ public class MusicaDAO extends GenericDAO<Musica>{
                 return true;
             }
 
-        } catch (Exception e) {
-            e.printStackTrace();
+        } catch (SQLException e) {
+            GeradorLog.getLoggerFull().severe(e.toString());
         }
         return false;
     }
@@ -89,8 +87,8 @@ public class MusicaDAO extends GenericDAO<Musica>{
                 return true;
             }
 
-        } catch (Exception e) {
-            e.printStackTrace();
+        } catch (SQLException e) {
+            GeradorLog.getLoggerFull().severe(e.toString());
         }
         return false;
     }
@@ -112,8 +110,8 @@ public class MusicaDAO extends GenericDAO<Musica>{
                 musica.setArquivo(new File(rs.getString("MUS_ARQUIVO")));
                 musicas.add(musica);
             }
-        } catch (Exception e) {
-            //who cares?
+        } catch (SQLException e) {
+            GeradorLog.getLoggerFull().severe(e.toString());
         }
         return musicas;
     }
@@ -134,8 +132,8 @@ public class MusicaDAO extends GenericDAO<Musica>{
                 musica.setAlbum(rs.getString("MUS_ALBUM"));
                 musica.setArquivo(new File(rs.getString("MUS_ARQUIVO")));
             }
-        } catch (Exception e) {
-            //who cares?
+        } catch (SQLException e) {
+            GeradorLog.getLoggerFull().severe(e.toString());
         }
         return musica;
     }
@@ -157,8 +155,9 @@ public class MusicaDAO extends GenericDAO<Musica>{
                 musica.setArquivo(new File(rs.getString("MUS_ARQUIVO")));
                 musicas.add(musica);
             }
-        } catch (Exception e) {
+        } catch (SQLException e) {
             //who cares?
+            GeradorLog.getLoggerFull().severe(e.toString());
         }
         return musicas;
     }
@@ -203,8 +202,9 @@ public class MusicaDAO extends GenericDAO<Musica>{
                 musica.setArquivo(new File(rs.getString("MUS_ARQUIVO")));
                 musicas.add(musica);
             }
-        } catch (Exception e) {
+        } catch (SQLException e) {
             //who cares?
+            GeradorLog.getLoggerFull().severe(e.toString());
         }
         return musicas;
     }
@@ -226,8 +226,9 @@ public class MusicaDAO extends GenericDAO<Musica>{
                 musica.setArquivo(new File(rs.getString("MUS_ARQUIVO")));
                 musicas.add(musica);
             }
-        } catch (Exception e) {
+        } catch (SQLException e) {
             //who cares?
+            GeradorLog.getLoggerFull().severe(e.toString());
         }
         return musicas;
     }

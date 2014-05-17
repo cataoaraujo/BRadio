@@ -1,3 +1,4 @@
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -6,11 +7,12 @@
 
 package Model.DAO;
 
-import Model.Musica;
+import Model.Logger.GeradorLog;
 import Model.Radialista;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Collection;
 
@@ -42,8 +44,8 @@ public class RadialistaDAO extends GenericDAO<Radialista>{
                 return true;
             }
 
-        } catch (Exception e) {
-            e.printStackTrace();
+        } catch (SQLException e) {
+            GeradorLog.getLoggerFull().severe(e.toString());
         }
         return false;
     }
@@ -63,8 +65,8 @@ public class RadialistaDAO extends GenericDAO<Radialista>{
                 return true;
             }
 
-        } catch (Exception e) {
-            e.printStackTrace();
+        } catch (SQLException e) {
+            GeradorLog.getLoggerFull().severe(e.toString());
         }
         return false;
     }
@@ -80,8 +82,8 @@ public class RadialistaDAO extends GenericDAO<Radialista>{
                 return true;
             }
 
-        } catch (Exception e) {
-            e.printStackTrace();
+        } catch (SQLException e) {
+            GeradorLog.getLoggerFull().severe(e.toString());
         }
         return false;
     }
@@ -103,8 +105,9 @@ public class RadialistaDAO extends GenericDAO<Radialista>{
                 radialista.setTelefone(rs.getString("RAD_TELEFONE"));
                 radialistas.add(radialista);
             }
-        } catch (Exception e) {
+        } catch (SQLException e) {
             //who cares?
+            GeradorLog.getLoggerFull().severe(e.toString());
         }
         return radialistas;
     }
@@ -125,8 +128,9 @@ public class RadialistaDAO extends GenericDAO<Radialista>{
                 radialista.setInicio(rs.getDate("RAD_DATAINICIO"));
                 radialista.setTelefone(rs.getString("RAD_TELEFONE"));
             }
-        } catch (Exception e) {
+        } catch (SQLException e) {
             //who cares?
+            GeradorLog.getLoggerFull().severe(e.toString());
         }
         return radialista;
     }

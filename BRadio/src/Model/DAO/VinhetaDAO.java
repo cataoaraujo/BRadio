@@ -5,11 +5,13 @@
  */
 package Model.DAO;
 
+import Model.Logger.GeradorLog;
 import Model.Vinheta;
 import java.io.File;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Collection;
 
@@ -38,8 +40,8 @@ public class VinhetaDAO extends GenericDAO<Vinheta> {
                 return true;
             }
 
-        } catch (Exception e) {
-            e.printStackTrace();
+        } catch (SQLException e) {
+            GeradorLog.getLoggerFull().severe(e.toString());
         }
         return false;
     }
@@ -55,8 +57,8 @@ public class VinhetaDAO extends GenericDAO<Vinheta> {
             if (pStatement.executeUpdate() > 0) {
                 return true;
             }
-        } catch (Exception e) {
-            e.printStackTrace();
+        } catch (SQLException e) {
+            GeradorLog.getLoggerFull().severe(e.toString());
         }
         return false;
     }
@@ -70,8 +72,8 @@ public class VinhetaDAO extends GenericDAO<Vinheta> {
             if (pStatement.executeUpdate() > 0) {
                 return true;
             }
-        } catch (Exception e) {
-            e.printStackTrace();
+        } catch (SQLException e) {
+            GeradorLog.getLoggerFull().severe(e.toString());
         }
         return false;
     }
@@ -90,8 +92,9 @@ public class VinhetaDAO extends GenericDAO<Vinheta> {
                 vinheta.setArquivo(new File(rs.getString("VIN_ARQUIVO")));
                 vinhetas.add(vinheta);
             }
-        } catch (Exception e) {
+        } catch (SQLException e) {
             //who cares?
+            GeradorLog.getLoggerFull().severe(e.toString());
         }
         return vinhetas;
     }
@@ -109,8 +112,9 @@ public class VinhetaDAO extends GenericDAO<Vinheta> {
                 vinheta.setNome(rs.getString("VIN_NOME"));
                 vinheta.setArquivo(new File(rs.getString("VIN_ARQUIVO")));
             }
-        } catch (Exception e) {
+        } catch (SQLException e) {
             //who cares?
+            GeradorLog.getLoggerFull().severe(e.toString());
         }
         return vinheta;
     }
@@ -128,8 +132,9 @@ public class VinhetaDAO extends GenericDAO<Vinheta> {
                 vinheta.setNome(rs.getString("VIN_NOME"));
                 vinheta.setArquivo(new File(rs.getString("VIN_ARQUIVO")));
             }
-        } catch (Exception e) {
+        } catch (SQLException e) {
             //who cares?
+            GeradorLog.getLoggerFull().severe(e.toString());
         }
         return vinheta;
     }

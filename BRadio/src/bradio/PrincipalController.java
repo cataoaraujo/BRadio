@@ -33,9 +33,9 @@ import javafx.util.Duration;
  */
 public class PrincipalController implements Initializable {
 
-    private Player<Propaganda> playerPropaganda = new Player<>();
-    private Player<Musica> playerMusica = new Player<>();
-    private Player<Vinheta> playerVinheta = new Player<>();
+    private final Player<Propaganda> playerPropaganda = new Player<>();
+    private final Player<Musica> playerMusica = new Player<>();
+    private final Player<Vinheta> playerVinheta = new Player<>();
 
     public ListView<Propaganda> listaPropagandas = new ListView<>();
     public ListView<Musica> listaMusicas = new ListView<>();
