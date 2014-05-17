@@ -86,7 +86,7 @@ public class LoginController implements Initializable {
         File diretorio = dc.showDialog(new Stage());
         if (diretorio != null) {
             final ArrayList<File> musicas = getMusicas(diretorio);
-            System.out.println(musicas.size());
+            //System.out.println(musicas.size());
             new Thread() {
                 @Override
                 public void run() {

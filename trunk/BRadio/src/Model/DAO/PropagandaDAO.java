@@ -5,12 +5,14 @@
  */
 package Model.DAO;
 
+import Model.Logger.GeradorLog;
 import Model.Propaganda;
 import java.io.File;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Time;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -41,8 +43,8 @@ public class PropagandaDAO extends GenericDAO<Propaganda> {
                 return true;
             }
 
-        } catch (Exception e) {
-            e.printStackTrace();
+        } catch (SQLException e) {
+            GeradorLog.getLoggerFull().severe(e.toString());
         }
         return false;
     }
@@ -58,8 +60,8 @@ public class PropagandaDAO extends GenericDAO<Propaganda> {
                 return true;
             }
 
-        } catch (Exception e) {
-            e.printStackTrace();
+        } catch (SQLException e) {
+            GeradorLog.getLoggerFull().severe(e.toString());
         }
         return false;
     }
@@ -77,8 +79,8 @@ public class PropagandaDAO extends GenericDAO<Propaganda> {
                 return true;
             }
 
-        } catch (Exception e) {
-            e.printStackTrace();
+        } catch (SQLException e) {
+            GeradorLog.getLoggerFull().severe(e.toString());
         }
         return false;
     }
@@ -93,8 +95,8 @@ public class PropagandaDAO extends GenericDAO<Propaganda> {
                 return true;
             }
 
-        } catch (Exception e) {
-            e.printStackTrace();
+        } catch (SQLException e) {
+            GeradorLog.getLoggerFull().severe(e.toString());
         }
         return false;
     }
@@ -116,8 +118,8 @@ public class PropagandaDAO extends GenericDAO<Propaganda> {
                 propaganda.setArquivo(new File(rs.getString("PRO_ARQUIVO")));
                 propagandas.add(propaganda);
             }
-        } catch (Exception e) {
-            //who cares?
+        } catch (SQLException e) {
+            GeradorLog.getLoggerFull().severe(e.toString());
         }
         return propagandas;
     }
@@ -138,8 +140,8 @@ public class PropagandaDAO extends GenericDAO<Propaganda> {
                 propaganda.setArquivo(new File(rs.getString("PRO_ARQUIVO")));
                 return propaganda;
             }
-        } catch (Exception e) {
-            //who cares?
+        } catch (SQLException e) {
+            GeradorLog.getLoggerFull().severe(e.toString());
         }
         return null;
     }
@@ -162,8 +164,8 @@ public class PropagandaDAO extends GenericDAO<Propaganda> {
                 propaganda.setData(rs.getDate("DIP_DATA").toLocalDate());
                 propagandas.add(propaganda);
             }
-        } catch (Exception e) {
-            //who cares?
+        } catch (SQLException e) {
+            GeradorLog.getLoggerFull().severe(e.toString());
         }
         return propagandas;
     }
@@ -179,8 +181,8 @@ public class PropagandaDAO extends GenericDAO<Propaganda> {
                 return true;
             }
 
-        } catch (Exception e) {
-            e.printStackTrace();
+        } catch (SQLException e) {
+            GeradorLog.getLoggerFull().severe(e.toString());
         }
         return false;
     }

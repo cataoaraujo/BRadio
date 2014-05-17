@@ -5,8 +5,12 @@
  */
 package bradio;
 
+import Model.Configuration;
+import Model.DAO.ConnectionFactory;
+import Model.Logger.GeradorLog;
 import Model.Login;
 import insidefx.undecorator.Undecorator;
+import java.io.IOException;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.JavaFXBuilderFactory;
@@ -28,6 +32,27 @@ public class BRadio extends Application {
 
     public BRadio() {
         instance = this;
+        boot();
+        Configuration conf = Configuration.getInstance();
+        conf.readConfiguration();
+    }
+
+    private void boot() {
+        boolean problema = false;
+        if (ConnectionFactory.getConnection() == null) {
+            problema = true;
+            GeradorLog.getLoggerFull().severe("Banco de Dados não iniciou.");
+        }
+
+        if (problema) {
+            try {
+                //Abrir Log
+                Runtime.getRuntime().exec("explorer log.html");
+            } catch (IOException ex) {
+                GeradorLog.getLoggerFull().severe("Não foi abrir o arquivo de log.");
+            }
+            stage.close();
+        }
     }
 
     public static BRadio getInstance() {
@@ -43,67 +68,35 @@ public class BRadio extends Application {
     }
 
     public void goToLogin() {
-        try {
-            replaceSceneContent("Login.fxml");
-        } catch (Exception ex) {
-            System.out.println("erro: ProjetoFinal.goToLogin");
-        }
+        replaceSceneContent("Login.fxml");
     }
 
     public void goToPrincipal() {
-        try {
-            replaceSceneContent("Principal.fxml");
-        } catch (Exception ex) {
-            System.out.println("erro: ProjetoFinal.goToPrincipal");
-        }
+        replaceSceneContent("Principal.fxml", Configuration.getInstance());
     }
 
     public void goToCadastroRadialista() {
-        try {
-            replaceSceneContent("cadastroRadialista.fxml");
-        } catch (Exception ex) {
-
-        }
+        replaceSceneContent("cadastroRadialista.fxml");
     }
 
     public void goToCadastroPrograma() {
-        try {
-            replaceSceneContent("CadastroPrograma.fxml");
-        } catch (Exception ex) {
-
-        }
+        replaceSceneContent("CadastroPrograma.fxml");
     }
 
     public void goToCadastroCliente() {
-        try {
-            replaceSceneContent("CadastroCliente.fxml");
-        } catch (Exception e) {
-
-        }
+        replaceSceneContent("CadastroCliente.fxml");
     }
 
     public void goToCadastroVinheta() {
-        try {
-            replaceSceneContent("CadastroVinheta.fxml");
-        } catch (Exception e) {
-
-        }
+        replaceSceneContent("CadastroVinheta.fxml");
     }
 
     public void goToCadastroPropaganda() {
-        try {
-            replaceSceneContent("CadastroPropaganda.fxml");
-        } catch (Exception e) {
-
-        }
+        replaceSceneContent("CadastroPropaganda.fxml");
     }
 
     public void goToCadastroHorariosPropaganda() {
-        try {
-            replaceSceneContent("CadastroHorariosPropaganda.fxml");
-        } catch (Exception e) {
-
-        }
+        replaceSceneContent("CadastroHorariosPropaganda.fxml");
     }
 
     private Parent replaceSceneContent(String fxml) {
@@ -121,8 +114,35 @@ public class BRadio extends Application {
             stage.centerOnScreen();
             stage.show();
             return page;
-        } catch (Exception e) {
-            System.out.println("Erro: replaceSceneContent: " + e);
+        } catch (IOException e) {
+            GeradorLog.getLoggerFull().severe("FXML: " + fxml + " --- replaceSceneContent: " + e);
+            return null;
+        }
+    }
+
+    private Parent replaceSceneContent(String fxml, Configuration conf) {
+        try {
+            Parent page = (Parent) FXMLLoader.load(BRadio.class.getResource(fxml), null, new JavaFXBuilderFactory());
+            stage.close(); //Para nao dar erro no Undecorator na hora de trocar a tela
+            stage = new Stage(StageStyle.TRANSPARENT);
+            Undecorator undecorator = new Undecorator(stage, (Region) page);
+            undecorator.getStylesheets().add("skin/undecorator.css");
+            Scene scene = new Scene(undecorator);
+            scene.setFill(Color.TRANSPARENT);
+            stage.setScene(scene);
+
+            //stage.sizeToScene();
+            stage.centerOnScreen();
+
+//Configuration
+            stage.setWidth(conf.getWidth());
+            stage.setHeight(conf.getHeight());
+            stage.setFullScreen(conf.isFullScreen());
+            System.out.println(conf.isFullScreen());
+            stage.show();
+            return page;
+        } catch (IOException e) {
+            GeradorLog.getLoggerFull().severe("FXML: " + fxml + " --- replaceSceneContent: " + e);
             return null;
         }
     }

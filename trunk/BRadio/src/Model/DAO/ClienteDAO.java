@@ -6,9 +6,11 @@
 package Model.DAO;
 
 import Model.*;
+import Model.Logger.GeradorLog;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 import java.util.Collection;
@@ -41,8 +43,8 @@ public class ClienteDAO extends GenericDAO<Cliente> {
                 return true;
             }
 
-        } catch (Exception e) {
-            e.printStackTrace();
+        } catch (SQLException e) {
+            GeradorLog.getLoggerFull().severe(e.toString());
         }
         return false;
     }
@@ -61,8 +63,8 @@ public class ClienteDAO extends GenericDAO<Cliente> {
                 return true;
             }
 
-        } catch (Exception e) {
-            e.printStackTrace();
+        } catch (SQLException e) {
+            GeradorLog.getLoggerFull().severe(e.toString());
         }
         return false;
     }
@@ -90,8 +92,9 @@ public class ClienteDAO extends GenericDAO<Cliente> {
                 cliente.setDataCadastro(rs.getDate("CLI_DATACADASTRO"));
                 clientes.add(cliente);
             }
-        } catch (Exception e) {
+        } catch (SQLException e) {
             //who cares?
+            GeradorLog.getLoggerFull().severe(e.toString());
         }
         return clientes;
     }
@@ -113,8 +116,9 @@ public class ClienteDAO extends GenericDAO<Cliente> {
                 cliente.setEndereco(rs.getString("CLI_ENDERECO"));
                 cliente.setDataCadastro(rs.getDate("CLI_DATACADASTRO"));
             }
-        } catch (Exception e) {
+        } catch (SQLException e) {
             //who cares?
+            GeradorLog.getLoggerFull().severe(e.toString());
         }
         return cliente;
     }

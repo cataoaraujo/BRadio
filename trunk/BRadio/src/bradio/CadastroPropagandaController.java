@@ -55,7 +55,7 @@ public class CadastroPropagandaController implements Initializable {
 
     LocalDate inicio = LocalDate.now();
     LocalDate fim = LocalDate.now();
-    private ArrayList<CheckBox> dias = new ArrayList<CheckBox>();
+    private ArrayList<CheckBox> dias = new ArrayList<>();
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -70,13 +70,12 @@ public class CadastroPropagandaController implements Initializable {
 
     private ArrayList<LocalTime> getHorarios() {
         ArrayList<LocalTime> horarios = new ArrayList<>();
-        LocalTime novo = LocalTime.parse("00:00:00");
-        LocalTime fim = LocalTime.parse("23:45:00");
-        horarios.add(novo);
-        while (novo.isBefore(fim)) {
-            novo = novo.plusMinutes(15);
-            //System.out.println(novo);
-            horarios.add(novo);
+        LocalTime inicia = LocalTime.parse("00:00:00");
+        LocalTime termina = LocalTime.parse("23:45:00");
+        horarios.add(inicia);
+        while (inicia.isBefore(termina)) {
+            inicia = inicia.plusMinutes(15);
+            horarios.add(inicia);
         }
         return horarios;
     }
@@ -108,20 +107,14 @@ public class CadastroPropagandaController implements Initializable {
             fim = dataFim.getValue();
             vbDias.getChildren().clear();
             LocalDate data = inicio;
-            if (ChronoUnit.DAYS.between(inicio, fim) >= 7) {
-                criaDiaSemana(inicio.getDayOfWeek().getDisplayName(TextStyle.FULL, Locale.getDefault()), inicio.getDayOfWeek().getValue());
-                for (int i = 0; i < 6; i++) {
-                    data = data.plus(1, ChronoUnit.DAYS);
-                    criaDiaSemana(data.getDayOfWeek().getDisplayName(TextStyle.FULL, Locale.getDefault()), data.getDayOfWeek().getValue());
-                }
-            } else {
-
-                criaDiaSemana(inicio.getDayOfWeek().getDisplayName(TextStyle.FULL, Locale.getDefault()), inicio.getDayOfWeek().getValue());
-                for (int i = 0; i < ChronoUnit.DAYS.between(inicio, fim); i++) {
-                    data = data.plus(1, ChronoUnit.DAYS);
-                    criaDiaSemana(data.getDayOfWeek().getDisplayName(TextStyle.FULL, Locale.getDefault()), data.getDayOfWeek().getValue());
-                }
+            
+            criaDiaSemana(inicio.getDayOfWeek().getDisplayName(TextStyle.FULL, Locale.getDefault()), inicio.getDayOfWeek().getValue());
+            long diferenca = ChronoUnit.DAYS.between(inicio, fim);
+            for (int i = 0; i < diferenca && i < 6; i++) {
+                data = data.plus(1, ChronoUnit.DAYS);
+                criaDiaSemana(data.getDayOfWeek().getDisplayName(TextStyle.FULL, Locale.getDefault()), data.getDayOfWeek().getValue());
             }
+
         }
     }
 
@@ -143,12 +136,12 @@ public class CadastroPropagandaController implements Initializable {
             propaganda.setNome(edtNome.getText());
 
             PropagandaDAO pd = new PropagandaDAO(ConnectionFactory.getConnection());
-            
+
             pd.insert(propaganda);
-            
+
             long diferenca = ChronoUnit.DAYS.between(inicio, fim);
             LocalDate data = inicio;
-            for (int i = 0; i < diferenca+1; i++) {
+            for (int i = 0; i < diferenca + 1; i++) {
                 if (verificaDia(data.getDayOfWeek().getValue())) {
                     propaganda.setData(data);
                     for (LocalTime hora : listaHorarios.getSelectionModel().getSelectedItems()) {

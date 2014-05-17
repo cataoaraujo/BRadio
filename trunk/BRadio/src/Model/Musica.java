@@ -5,9 +5,9 @@
  */
 package Model;
 
+import Model.Logger.GeradorLog;
 import java.io.File;
 import java.io.IOException;
-import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.farng.mp3.MP3File;
 import org.farng.mp3.TagException;
@@ -96,7 +96,8 @@ public class Musica {
             }
 
         } catch (IOException | TagException ex) {
-            Logger.getLogger(Musica.class.getName()).severe("Problema ao coletar dados da música \"" + this.getArquivo().getAbsolutePath() + "\" ");
+            
+            GeradorLog.getLoggerFull().severe("Problema ao coletar dados da música \"" + this.getArquivo().getAbsolutePath() + "\" ");
             //Logger.getLogger(Musica.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
             if (titulo == null) {
