@@ -5,7 +5,9 @@
  */
 package Model;
 
+import bradio.PrincipalController;
 import java.io.File;
+import java.util.ArrayList;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.scene.control.ProgressBar;
@@ -19,12 +21,25 @@ import javafx.util.Duration;
  */
 public class Player<T> {
 
+    private ArrayList<File> arquivos = new ArrayList<>();
     private File arquivo;
     private EstadoPlayer estado;
     private MediaPlayer mediaPlayer;
 
     private ProgressBar pb;
     private ChangeListener<Duration> progressChangeListener;
+
+    public void addArquivo(int index, File f) {
+        arquivos.add(index, f);
+    }
+
+    public void addArquivo(File f) {
+        arquivos.add(f);
+    }
+
+    public void removeArquivo(File f) {
+        arquivos.remove(f);
+    }
 
     public File getArquivo() {
         return arquivo;
@@ -54,11 +69,12 @@ public class Player<T> {
     }
 
     public boolean play() {
-        if (arquivo != null) {
+        if (!arquivos.isEmpty()) {
             if (mediaPlayer != null) {
                 mediaPlayer.dispose();
             }
-            String source = this.arquivo.toURI().toString();
+            String source = this.arquivos.get(0).toURI().toString();
+            removeArquivo(arquivos.get(0));
             Media media = new Media(source);
             mediaPlayer = new MediaPlayer(media);
             mediaPlayer.play();
@@ -66,6 +82,9 @@ public class Player<T> {
                 atualizaProgressBar();
             }
             this.estado = EstadoPlayer.Tocando;
+            if (!arquivos.isEmpty()) {
+                tocarProxima();
+            }
             return true;
         } else {
             return false;
@@ -78,5 +97,16 @@ public class Player<T> {
             this.estado = EstadoPlayer.Parado;
         }
         return true;
+    }
+
+    public void tocarProxima() {
+        mediaPlayer.setOnEndOfMedia(new Runnable() {
+            @Override
+            public void run() {
+                if (!arquivos.isEmpty()) {
+                    play();
+                }
+            }
+        });
     }
 }

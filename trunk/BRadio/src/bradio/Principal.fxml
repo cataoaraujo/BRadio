@@ -13,9 +13,9 @@
       <children>
         <MenuBar maxHeight="-Infinity" maxWidth="1.7976931348623157E308" prefHeight="29.0" prefWidth="960.0" useSystemMenuBar="false" VBox.vgrow="ALWAYS">
           <menus>
-            <Menu mnemonicParsing="false" text="Programar">
+            <Menu mnemonicParsing="false" text="Programa">
               <items>
-                <MenuItem mnemonicParsing="false" text="Close" />
+                <MenuItem mnemonicParsing="false" onAction="#encerraPrograma" text="Encerrar programa" />
               </items>
             </Menu>
             <Menu mnemonicParsing="false" text="Editar">
@@ -43,12 +43,12 @@
                 <Insets fx:id="x1" />
               </HBox.margin>
             </Label>
-            <Label id="" fx:id="relogio" alignment="CENTER" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" prefHeight="47.000099999997474" prefWidth="160.0" style="-fx-text-fill: #FF0;" text="20:15:17" HBox.hgrow="ALWAYS" HBox.margin="$x1">
+            <Label id="" fx:id="relogio" alignment="CENTER" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" onMouseClicked="#falaHora" prefHeight="47.000099999997474" prefWidth="160.0" style="-fx-text-fill: #FF0;" text="20:15:17" HBox.hgrow="ALWAYS" HBox.margin="$x1">
               <font>
                 <Font name="System Bold" size="35.0" />
               </font>
             </Label>
-            <Label fx:id="data" alignment="CENTER" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" prefHeight="50.0" prefWidth="400.0" text="Quinta-feira, 21 de abril de 2014" textFill="#292929" HBox.hgrow="ALWAYS">
+            <Label fx:id="data" alignment="CENTER" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" onMouseClicked="#falaData" prefHeight="50.0" prefWidth="400.0" text="Quinta-feira, 21 de abril de 2014" textFill="#292929" HBox.hgrow="ALWAYS">
               <font>
                 <Font name="System Bold" size="25.0" />
               </font>
@@ -164,7 +164,7 @@
                                 </Button>
                               </children>
                             </HBox>
-                            <ListView fx:id="listaPlaylist" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="150.0" prefWidth="425.0" VBox.vgrow="ALWAYS">
+                            <ListView fx:id="listaPlaylist" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onMouseClicked="#tocarProxima" prefHeight="150.0" prefWidth="425.0" VBox.vgrow="ALWAYS">
                               <contextMenu>
                                 <ContextMenu>
                                   <items>

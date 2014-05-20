@@ -10,10 +10,15 @@ import Model.DAO.ConnectionFactory;
 import Model.DAO.MusicaDAO;
 import Model.DAO.PropagandaDAO;
 import Model.DAO.VinhetaDAO;
+import java.io.File;
 import java.net.URL;
 import java.sql.Date;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.Month;
+import java.time.format.TextStyle;
 import java.util.Collection;
+import java.util.Locale;
 import java.util.ResourceBundle;
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
@@ -24,6 +29,7 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
+import javafx.scene.input.MouseEvent;
 import javafx.util.Callback;
 import javafx.util.Duration;
 
@@ -36,6 +42,7 @@ public class PrincipalController implements Initializable {
     private final Player<Propaganda> playerPropaganda = new Player<>();
     private final Player<Musica> playerMusica = new Player<>();
     private final Player<Vinheta> playerVinheta = new Player<>();
+    private Player<File> playerHora = new Player<>();
 
     public ListView<Propaganda> listaPropagandas = new ListView<>();
     public ListView<Musica> listaMusicas = new ListView<>();
@@ -103,7 +110,7 @@ public class PrincipalController implements Initializable {
         listaPropagandas.getSelectionModel().clearSelection();
     }
 
-    public void selecionaMusica() {
+    public void selecionaMusica(MouseEvent e) {
         if (listaMusicas.getSelectionModel().getSelectedItem() != null) {
             Musica m = listaMusicas.getSelectionModel().getSelectedItem();
             codigoSelecionada.setText(m.getCodigo() + "");
@@ -111,26 +118,38 @@ public class PrincipalController implements Initializable {
             generoSelecionada.setText(m.getGenero());
             artistaSelecionada.setText(m.getArtista());
             albumSelecionada.setText(m.getAlbum());
+            if (e.getClickCount() == 2) {
+                listaPlaylist.getItems().add(m);
+                playerMusica.addArquivo(m.getArquivo());
+            }
         }
+
     }
 
     public void addPlaylist() {
         if (listaMusicas.getSelectionModel().getSelectedItem() != null) {
             Musica m = listaMusicas.getSelectionModel().getSelectedItem();
             listaPlaylist.getItems().add(m);
+            playerMusica.addArquivo(m.getArquivo());
         }
     }
 
-    public void tocarProxima() {
-        if (listaPlaylist.getSelectionModel().getSelectedItem() != null) {
-            tocarSelecionada();
-        } else {
-            if (listaPlaylist.getItems().size() > 0) {
-                Musica m = listaPlaylist.getItems().get(0);
-                listaPlaylist.getItems().remove(m);
-                playerMusica.setArquivo(m.getArquivo());
-                playerMusica.play();
-                setMusicaTocando(m);
+    public void tocarProxima(MouseEvent e) {
+        if (e.getClickCount() == 2) {
+            if (listaPlaylist.getSelectionModel().getSelectedItem() != null) {
+                tocarSelecionada();
+            } else {
+                if (listaPlaylist.getItems().size() > 0) {
+                    Musica m = listaPlaylist.getItems().get(0);
+                    listaPlaylist.getItems().remove(m);
+
+                    playerMusica.removeArquivo(m.getArquivo());
+                    playerMusica.addArquivo(0, m.getArquivo());
+                    //playerMusica.setArquivo(m.getArquivo());
+
+                    playerMusica.play();
+                    setMusicaTocando(m);
+                }
             }
         }
     }
@@ -139,7 +158,11 @@ public class PrincipalController implements Initializable {
         if (listaPlaylist.getSelectionModel().getSelectedItem() != null) {
             Musica m = listaPlaylist.getSelectionModel().getSelectedItem();
             listaPlaylist.getItems().remove(listaPlaylist.getSelectionModel().getSelectedIndex());
-            playerMusica.setArquivo(m.getArquivo());
+
+            //playerMusica.setArquivo(m.getArquivo());
+            playerMusica.removeArquivo(m.getArquivo());
+            playerMusica.addArquivo(0, m.getArquivo());
+
             playerMusica.play();
             setMusicaTocando(m);
             listaPlaylist.getSelectionModel().selectFirst();
@@ -163,6 +186,7 @@ public class PrincipalController implements Initializable {
         if (listaPlaylist.getSelectionModel().getSelectedItem() != null) {
             Musica m = listaPlaylist.getSelectionModel().getSelectedItem();
             listaPlaylist.getItems().remove(m);
+            playerMusica.removeArquivo(m.getArquivo());
         }
     }
 
@@ -185,7 +209,7 @@ public class PrincipalController implements Initializable {
         VinhetaDAO vd = new VinhetaDAO(ConnectionFactory.getConnection());
         v = vd.getByNome(v.getNome());
         if (v != null) {
-            playerVinheta.setArquivo(v.getArquivo());
+            playerVinheta.addArquivo(v.getArquivo());
             playerVinheta.addProgressBar(progressoVinheta);
             playerVinheta.play();
             ultimaPropVin.setText(v.getNome());
@@ -193,10 +217,17 @@ public class PrincipalController implements Initializable {
 
     }
 
+    public void encerraPrograma() {
+        playerMusica.stop();
+        playerPropaganda.stop();
+        playerVinheta.stop();
+        BRadio.getInstance().goToLogin();
+    }
+
     public void tocarPropaganda() {
         Propaganda p = listaPropagandas.getSelectionModel().getSelectedItem();
         if (p != null) {
-            playerPropaganda.setArquivo(p.getArquivo());
+            playerPropaganda.addArquivo(p.getArquivo());
             playerPropaganda.addProgressBar(progressoVinheta);
             playerPropaganda.play();
             ultimaPropVin.setText(p.getNome());
@@ -205,5 +236,32 @@ public class PrincipalController implements Initializable {
             propagandas.remove(p);
             atualizaPropagadas();
         }
+    }
+
+    public void falaHora() {
+        LocalDateTime ldt = LocalDateTime.now();
+        String hora = Integer.toString(ldt.getHour());
+        String minuto = (ldt.getMinute() < 10) ? "0" + Integer.toString(ldt.getMinute()) : Integer.toString(ldt.getMinute());
+        File fHora = new File("C:\\Users\\MatheuseJessica\\Documents\\NetBeansProjects\\ProjetoFinalTDS\\BRadio\\Falauto\\" + hora + "H.wav");
+        playerHora.addArquivo(0, fHora);
+        File fMin = new File("C:\\Users\\MatheuseJessica\\Documents\\NetBeansProjects\\ProjetoFinalTDS\\BRadio\\Falauto\\E" + minuto + "M.wav");
+        playerHora.addArquivo(1, fMin);
+        playerHora.play();
+    }
+
+    public void falaData() {
+        LocalDateTime ldt = LocalDateTime.now();
+        String diaSemana = ldt.getDayOfWeek().getDisplayName(TextStyle.FULL, Locale.getDefault());
+        String diaMes = (ldt.getDayOfMonth() < 10) ? "0" + Integer.toString(ldt.getDayOfMonth()) : Integer.toString(ldt.getDayOfMonth());
+        String mes = (ldt.getMonthValue() < 10) ? "0" + Integer.toString(ldt.getMonthValue()) : Integer.toString(ldt.getMonthValue());
+        File fDiaSemana = new File("C:\\Users\\MatheuseJessica\\Documents\\NetBeansProjects\\ProjetoFinalTDS\\BRadio\\Fala-Data\\" + diaSemana + ".wav");
+        playerHora.addArquivo(0, fDiaSemana);
+
+        File fDiaMes = new File("C:\\Users\\MatheuseJessica\\Documents\\NetBeansProjects\\ProjetoFinalTDS\\BRadio\\Fala-Data\\D" + diaMes + ".wav");
+        playerHora.addArquivo(1, fDiaMes);
+
+        File fMes = new File("C:\\Users\\MatheuseJessica\\Documents\\NetBeansProjects\\ProjetoFinalTDS\\BRadio\\Fala-Data\\m" + mes + ".wav");
+        playerHora.addArquivo(2, fMes);
+        playerHora.play();
     }
 }
