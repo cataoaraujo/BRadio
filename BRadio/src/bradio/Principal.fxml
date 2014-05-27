@@ -157,7 +157,7 @@
                                     <Insets left="10.0" right="10.0" />
                                   </HBox.margin>
                                 </Label>
-                                <Button maxHeight="-Infinity" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#tocarProxima" prefWidth="160.0" text="Proxima Musica" HBox.hgrow="ALWAYS">
+                                <Button maxHeight="-Infinity" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#tocarProxima2" prefWidth="160.0" text="Proxima Musica" HBox.hgrow="ALWAYS">
                                   <HBox.margin>
                                     <Insets fx:id="x1" />
                                   </HBox.margin>
@@ -263,7 +263,7 @@
                       <children>
                         <Label alignment="CENTER" font="$x2" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" prefWidth="400.0" text="Músicas" />
                         <ListView fx:id="listaMusicas" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onMouseClicked="#selecionaMusica" prefHeight="150.0" prefWidth="425.0" VBox.vgrow="ALWAYS" />
-                        <Button maxHeight="-Infinity" maxWidth="1.7976931348623157E308" minHeight="19.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="400.0" text="Pesquisar" VBox.vgrow="NEVER" />
+                        <Button maxHeight="-Infinity" maxWidth="1.7976931348623157E308" minHeight="19.0" mnemonicParsing="false" onAction="#pesquisar" prefHeight="27.0" prefWidth="400.0" text="Pesquisar" VBox.vgrow="NEVER" />
                       </children>
                     </VBox>
                     <VBox prefHeight="184.0" prefWidth="331.0" HBox.hgrow="ALWAYS">

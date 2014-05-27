@@ -8,6 +8,8 @@ package Model;
 import Model.Logger.GeradorLog;
 import java.io.File;
 import java.io.IOException;
+import java.nio.charset.Charset;
+import java.util.ArrayList;
 import java.util.logging.Logger;
 import org.farng.mp3.MP3File;
 import org.farng.mp3.TagException;
@@ -43,7 +45,9 @@ public class Musica {
     }
 
     public void setTitulo(String titulo) {
-        this.titulo = titulo;
+        if (titulo != null) {
+            this.titulo = titulo.replace("\0", "");
+        }
     }
 
     public String getArtista() {
@@ -51,7 +55,9 @@ public class Musica {
     }
 
     public void setArtista(String artista) {
-        this.artista = artista;
+        if (artista != null) {
+            this.artista = artista.replace("\0", "");
+        }
     }
 
     public String getGenero() {
@@ -59,7 +65,9 @@ public class Musica {
     }
 
     public void setGenero(String genero) {
-        this.genero = genero;
+        if (genero != null) {
+            this.genero = genero.replace("\0", "");
+        }
     }
 
     public String getAlbum() {
@@ -67,7 +75,9 @@ public class Musica {
     }
 
     public void setAlbum(String album) {
-        this.album = album;
+        if (album != null) {
+            this.album = album.replace("\0", "");
+        }
     }
 
     public File getArquivo() {
@@ -81,23 +91,27 @@ public class Musica {
     public void getMetadata() {
         try {
             MP3File mp3file = new MP3File(this.getArquivo());
-            if (mp3file.hasID3v2Tag()) {
-                AbstractID3v2 tag = mp3file.getID3v2Tag();
-                artista = tag.getLeadArtist();
-                titulo = tag.getSongTitle();
-                genero = tag.getSongGenre();
-                album = tag.getAlbumTitle();
-            } else if (mp3file.hasID3v1Tag()) {
+            if (mp3file.hasID3v1Tag()) {
                 ID3v1 tag = mp3file.getID3v1Tag();
-                artista = tag.getArtist();
-                titulo = tag.getTitle();
-                genero = tag.getGenre() + "";
-                album = tag.getAlbum();
+                this.setArtista(tag.getArtist());
+                this.setTitulo(tag.getTitle());
+                if (mp3file.hasID3v2Tag()) {
+                    AbstractID3v2 tag2 = mp3file.getID3v2Tag();
+                    this.setGenero(tag2.getSongGenre());
+                } else {
+                    this.setGenero(tag.getSongGenre());
+                }
+                this.setAlbum(tag.getAlbum());
+            } else if (mp3file.hasID3v2Tag()) {
+                AbstractID3v2 tag = mp3file.getID3v2Tag();
+                this.setArtista(tag.getLeadArtist());
+                this.setTitulo(tag.getSongTitle());
+                this.setGenero(tag.getSongGenre());
+                this.setAlbum(tag.getAlbumTitle());
             }
-
         } catch (IOException | TagException ex) {
-            
-            GeradorLog.getLoggerFull().severe("Problema ao coletar dados da música \"" + this.getArquivo().getAbsolutePath() + "\" ");
+
+            GeradorLog.getLoggerFull().severe("Problema ao coletar dados da música \"" + this.getArquivo().getAbsolutePath() + "\"  Problema:" + ex);
             //Logger.getLogger(Musica.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
             if (titulo == null) {
