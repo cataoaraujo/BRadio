@@ -5,6 +5,7 @@
  */
 package bradio;
 
+import bradio.busca.BuscaMusica;
 import Model.Configuration;
 import Model.DAO.ConnectionFactory;
 import Model.Logger.GeradorLog;
@@ -60,7 +61,7 @@ public class BRadio extends Application {
     }
 
     @Override
-    public void start(Stage primaryStage) throws Exception {
+    public void start(Stage primaryStage) throws Exception {        
         Login login = Login.getInstance();
         stage = primaryStage;
         goToLogin();

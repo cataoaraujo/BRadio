@@ -5,6 +5,8 @@
  */
 package Model.DAO;
 
+import Model.Configuration;
+import Model.Logger.GeradorLog;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -13,11 +15,11 @@ public class ConnectionFactory {
 
     private static Connection conn;
     private final static String DRIVER = "org.apache.mysql.jdbc.EmbeddedDriver";
-    private static String serverName = "localhost";
+    private static String serverName = Configuration.getInstance().getIpDataBase();
     private static String db = "BRadio";
     private static String url = "jdbc:mysql://" + serverName + "/" + db;
     private static String usuario = "root";
-    private static String senha = "";
+    private static String senha = "1234";
     
     public static Connection getConnection() {
         try {
@@ -25,11 +27,11 @@ public class ConnectionFactory {
                 try {
                     conn = DriverManager.getConnection(url, usuario, senha);
                 } catch (SQLException e) {
-                    e.printStackTrace();
+                    //GeradorLog.getLoggerFull().severe(e.toString());
                 }
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            //GeradorLog.getLoggerFull().severe(e.toString());
         }
         return conn;
     }
@@ -41,8 +43,8 @@ public class ConnectionFactory {
     public static void commit(){
         try {
             conn.commit();
-        } catch (SQLException ex) {
-            //Logger.getLogger(CriaBanco.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException e) {
+            //GeradorLog.getLoggerFull().severe(e.toString());
         }
     }
 
