@@ -100,6 +100,10 @@ public class BRadio extends Application {
         replaceSceneContent("CadastroHorariosPropaganda.fxml");
     }
     
+    public void goToRelatoriosPropaganda() {
+        replaceSceneContent("RelatoriosPropaganda.fxml");
+    }
+    
     public void goToEditarMusica(){
         replaceSceneContent("EditarMusica.fxml");
     }

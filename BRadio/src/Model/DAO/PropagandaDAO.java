@@ -14,6 +14,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Time;
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Collection;
 
@@ -148,8 +150,9 @@ public class PropagandaDAO extends GenericDAO<Propaganda> {
 
     /**
      * Retornar as Propagadas que ainda NÃO foram tocadas
+     *
      * @param data
-     * @return 
+     * @return
      */
     public Collection<Propaganda> getByDia(Date data) {
         String sqlGetAll = "SELECT * FROM tb_diaspropagandas WHERE DIP_DATA =? and DIP_TOCADA is null";
@@ -169,7 +172,7 @@ public class PropagandaDAO extends GenericDAO<Propaganda> {
         }
         return propagandas;
     }
-    
+
     public boolean tocou(Propaganda o) {
         String sqlInsert = "UPDATE tb_diaspropagandas SET DIP_TOCADA=now() WHERE DIP_DATA=? AND DIP_HORARIOPREVISTO=? AND DIP_CODPROPAGANDA=?";
         try {
@@ -185,6 +188,153 @@ public class PropagandaDAO extends GenericDAO<Propaganda> {
             GeradorLog.getLoggerFull().severe(e.toString());
         }
         return false;
+    }
+
+    public Collection<Propaganda> relatorioEntreDatas(LocalDate d1, LocalDate d2) {
+        String sql = "SELECT * "
+                + "FROM tb_diaspropagandas, tb_propaganda"
+                + " WHERE DIP_DATA BETWEEN ? AND ? AND PRO_CODIGO = DIP_CODPROPAGANDA"
+                + " ORDER BY DIP_DATA, DIP_HORARIOPREVISTO";
+        Collection<Propaganda> propagandas = new ArrayList<>();
+        try {
+            PreparedStatement pStatement = conn.prepareStatement(sql);
+            pStatement.setObject(1, Date.valueOf(d1));
+            pStatement.setObject(2, Date.valueOf(d2));
+            ResultSet rs = pStatement.executeQuery();
+            while (rs.next()) {
+                Propaganda propaganda = getByCodigo(rs.getInt("DIP_CODPROPAGANDA"));
+                propaganda.setNome(rs.getString("PRO_NOME"));
+                propaganda.setHora(rs.getTime("DIP_HORARIOPREVISTO").toLocalTime());
+                propaganda.setData(rs.getDate("DIP_DATA").toLocalDate());
+                propagandas.add(propaganda);
+            }
+        } catch (Exception e) {
+
+        }
+        return propagandas;
+    }
+
+    public Collection<Propaganda> getBetween(LocalDate d1, LocalDate d2) {
+        String sql = "SELECT * FROM tb_diaspropagandas, tb_propaganda "
+                + "WHERE DIP_DATA BETWEEN ? AND ? AND PRO_CODIGO = DIP_CODPROPAGANDA "
+                + "GROUP BY DIP_CODPROPAGANDA "
+                + "ORDER BY DIP_DATA, DIP_HORARIOPREVISTO";
+        Collection<Propaganda> propagandas = new ArrayList<>();
+        try {
+            PreparedStatement pStatement = conn.prepareStatement(sql);
+            pStatement.setObject(1, Date.valueOf(d1));
+            pStatement.setObject(2, Date.valueOf(d2));
+            ResultSet rs = pStatement.executeQuery();
+            while (rs.next()) {
+                Propaganda propaganda = getByCodigo(rs.getInt("DIP_CODPROPAGANDA"));
+                propaganda.setNome(rs.getString("PRO_NOME"));
+                propaganda.setHora(rs.getTime("DIP_HORARIOPREVISTO").toLocalTime());
+                propaganda.setData(rs.getDate("DIP_DATA").toLocalDate());
+                propagandas.add(propaganda);
+            }
+        } catch (Exception e) {
+
+        }
+        return propagandas;
+    }
+
+    public Collection<Propaganda> relatorioEntreDatas(LocalDate d1, LocalDate d2, Propaganda p) {
+        String sql = "SELECT * "
+                + "FROM tb_diaspropagandas, tb_propaganda"
+                + " WHERE DIP_CODPROPAGANDA = ? AND DIP_DATA BETWEEN ? AND ? AND PRO_CODIGO = DIP_CODPROPAGANDA"
+                + " ORDER BY DIP_DATA, DIP_HORARIOPREVISTO";
+        Collection<Propaganda> propagandas = new ArrayList<>();
+        try {
+            PreparedStatement pStatement = conn.prepareStatement(sql);
+            pStatement.setInt(1, p.getCodigo());
+            pStatement.setObject(2, Date.valueOf(d1));
+            pStatement.setObject(3, Date.valueOf(d2));
+            ResultSet rs = pStatement.executeQuery();
+            while (rs.next()) {
+                Propaganda propaganda = getByCodigo(rs.getInt("DIP_CODPROPAGANDA"));
+                propaganda.setNome(rs.getString("PRO_NOME"));
+                propaganda.setHora(rs.getTime("DIP_HORARIOPREVISTO").toLocalTime());
+                propaganda.setData(rs.getDate("DIP_DATA").toLocalDate());
+                propagandas.add(propaganda);
+            }
+        } catch (Exception e) {
+
+        }
+        return propagandas;
+    }
+
+    public Collection<Propaganda> getHorariosPropagandasAtivas(Propaganda p) {
+        String sql = "SELECT * "
+                + "FROM tb_diaspropagandas, tb_propaganda"
+                + " WHERE DIP_CODPROPAGANDA = ? AND PRO_ATIVA = 'S' AND PRO_CODIGO = DIP_CODPROPAGANDA"
+                + " AND DIP_DATA >= adddate(now(), -1)"
+                + " ORDER BY DIP_DATA, DIP_HORARIOPREVISTO";
+        Collection<Propaganda> propagandas = new ArrayList<>();
+        try {
+            PreparedStatement pStatement = conn.prepareStatement(sql);
+            pStatement.setObject(1, p.getCodigo());
+            ResultSet rs = pStatement.executeQuery();
+            while (rs.next()) {
+                Propaganda propaganda = getByCodigo(rs.getInt("DIP_CODPROPAGANDA"));
+                propaganda.setCodigo(rs.getInt("PRO_CODIGO"));
+                propaganda.setNome(rs.getString("PRO_NOME"));
+                propaganda.setHora(rs.getTime("DIP_HORARIOPREVISTO").toLocalTime());
+                propaganda.setData(rs.getDate("DIP_DATA").toLocalDate());
+                propagandas.add(propaganda);
+            }
+        } catch (Exception e) {
+
+        }
+        return propagandas;
+    }
+
+    public Collection<Propaganda> getHorariosPropagandas(Propaganda p) {
+        String sql = "SELECT * "
+                + "FROM tb_diaspropagandas, tb_propaganda"
+                + " WHERE DIP_CODPROPAGANDA = ?  AND PRO_CODIGO = DIP_CODPROPAGANDA"
+                + " ORDER BY DIP_DATA, DIP_HORARIOPREVISTO";
+        Collection<Propaganda> propagandas = new ArrayList<>();
+        try {
+            PreparedStatement pStatement = conn.prepareStatement(sql);
+            pStatement.setObject(1, p.getCodigo());
+            ResultSet rs = pStatement.executeQuery();
+            while (rs.next()) {
+                Propaganda propaganda = getByCodigo(rs.getInt("DIP_CODPROPAGANDA"));
+                propaganda.setCodigo(rs.getInt("PRO_CODIGO"));
+                propaganda.setNome(rs.getString("PRO_NOME"));
+                propaganda.setHora(rs.getTime("DIP_HORARIOPREVISTO").toLocalTime());
+                propaganda.setData(rs.getDate("DIP_DATA").toLocalDate());
+                propagandas.add(propaganda);
+            }
+        } catch (Exception e) {
+
+        }
+        return propagandas;
+    }
+
+    public Collection<Propaganda> getDatasPorHorario(Propaganda p, LocalTime t) {
+        String sql = "SELECT * "
+                + "FROM tb_diaspropagandas, tb_propaganda "
+                + "WHERE PRO_CODIGO = ? AND DIP_HORARIOPREVISTO = ? AND PRO_CODIGO = DIP_CODPROPAGANDA "
+                + "ORDER BY DIP_DATA, DIP_HORARIOPREVISTO";
+        Collection<Propaganda> propagandas = new ArrayList<>();
+        try {
+            PreparedStatement pStatement = conn.prepareStatement(sql);
+            pStatement.setObject(1, p.getCodigo());
+            pStatement.setObject(2, Time.valueOf(t));
+            ResultSet rs = pStatement.executeQuery();
+            while (rs.next()) {
+                Propaganda propaganda = getByCodigo(rs.getInt("DIP_CODPROPAGANDA"));
+                propaganda.setCodigo(rs.getInt("PRO_CODIGO"));
+                propaganda.setNome(rs.getString("PRO_NOME"));
+                propaganda.setHora(rs.getTime("DIP_HORARIOPREVISTO").toLocalTime());
+                propaganda.setData(rs.getDate("DIP_DATA").toLocalDate());
+                propagandas.add(propaganda);
+            }
+        } catch (Exception e) {
+
+        }
+        return propagandas;
     }
 
 }

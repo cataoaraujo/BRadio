@@ -11,6 +11,7 @@ import Model.DAO.MusicaDAO;
 import Model.DAO.PropagandaDAO;
 import Model.DAO.VinhetaDAO;
 import bradio.busca.BuscaMusica;
+import com.itextpdf.text.DocumentException;
 import java.io.File;
 import java.net.URL;
 import java.sql.Date;
@@ -75,7 +76,7 @@ public class PrincipalController implements Initializable {
         Relogio r = new Relogio(relogio, data);
         MusicaDAO md = new MusicaDAO(ConnectionFactory.getConnection());
         listaMusicas.getItems().addAll(md.getAll());
-
+        this.next();
         // TODO
         listaPropagandas.setCellFactory(new Callback<ListView<Propaganda>, ListCell<Propaganda>>() {
 
@@ -153,7 +154,7 @@ public class PrincipalController implements Initializable {
             }
         }
     }
-    
+
     public void tocarProxima(MouseEvent e) {
         if (e.getClickCount() == 2) {
             if (listaPlaylist.getSelectionModel().getSelectedItem() != null) {
@@ -174,8 +175,6 @@ public class PrincipalController implements Initializable {
             }
         }
     }
-
-    
 
     public void tocarSelecionada() {
         if (listaPlaylist.getSelectionModel().getSelectedItem() != null) {
@@ -291,13 +290,37 @@ public class PrincipalController implements Initializable {
         playerDataHora.addArquivo(2, fMes);
         playerDataHora.play();
     }
-    
-    public void pesquisar(){
+
+    public void pesquisar() {
         BuscaMusica.show(listaPlaylist);
 
         Musica musicaSelecionada = BuscaMusica.getMusicaSelecionada();
-        if(musicaSelecionada != null){
+        if (musicaSelecionada != null) {
             System.out.println(musicaSelecionada);
         }
+    }
+
+    public void relatorioPropagandas() {
+        BRadio.getInstance().goToRelatoriosPropaganda();
+    }
+
+    public void next() {
+        new Thread() {
+            @Override
+            public void run() {
+                System.out.println("Iniciou");
+                while (true) {
+                    //System.out.println(playerMusica.getEstado());
+                    if (EstadoPlayer.Ocioso.equals(playerMusica.getEstado())) {
+                        System.out.println("removeria 1 if");
+                        if (!listaPlaylist.getItems().isEmpty() && !playerMusica.getArquivos().isEmpty()) {
+                            System.out.println("removeria");
+                            //listaPlaylist.getItems().remove(0);
+                            playerMusica.play();
+                        }
+                    }
+                }
+            }
+        }/*.start()*/;
     }
 }

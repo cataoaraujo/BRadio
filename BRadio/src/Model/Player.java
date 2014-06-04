@@ -40,13 +40,17 @@ public class Player<T> {
         arquivos.remove(f);
     }
 
-    public File getArquivo() {
+    public ArrayList<File> getArquivos() {
+        return arquivos;
+    }
+    
+    /*public File getArquivo() {
         return arquivo;
     }
 
     public void setArquivo(File arquivo) {
         this.arquivo = arquivo;
-    }
+    }*/
 
     public EstadoPlayer getEstado() {
         return estado;
@@ -102,9 +106,11 @@ public class Player<T> {
         mediaPlayer.setOnEndOfMedia(new Runnable() {
             @Override
             public void run() {
-                if (!arquivos.isEmpty()) {
+                estado = EstadoPlayer.Ocioso;
+                System.out.println("acabou!");
+                /*if (!arquivos.isEmpty()) {
                     play();
-                }
+                }*/
             }
         });
     }

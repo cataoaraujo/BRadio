@@ -23,11 +23,16 @@
                 <MenuItem mnemonicParsing="false" text="Delete" />
               </items>
             </Menu>
-            <Menu mnemonicParsing="false" text="Propriedades">
+            <Menu mnemonicParsing="false" text="Relatorios">
               <items>
-                <MenuItem mnemonicParsing="false" text="About" />
+                <MenuItem mnemonicParsing="false" onAction="#relatorioPropagandas" text="Propagandas" />
               </items>
             </Menu>
+<Menu mnemonicParsing="false" text="Propriedades">
+<items>
+<MenuItem mnemonicParsing="false" text="About" />
+</items>
+</Menu>
           </menus>
           <VBox.margin>
             <Insets fx:id="x1" />
