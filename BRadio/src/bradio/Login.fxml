@@ -8,7 +8,7 @@
 <?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane id="AnchorPane" prefHeight="256.0" prefWidth="500.0" style="-fx-background-color: #000" styleClass="null" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="bradio.LoginController">
+<AnchorPane id="AnchorPane" prefHeight="256.0" prefWidth="500.0" style="-fx-background-color: #000" styleClass="null" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bradio.LoginController">
   <children>
     <VBox layoutX="0.0" layoutY="0.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="256.0" prefWidth="500.0" style="-fx-background-color: #000;">
       <children>
@@ -47,7 +47,12 @@
             <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="10.0">
               <children>
                 <Button mnemonicParsing="false" onAction="#cadastrarMusicas" text="Adicionar Musicas" />
-                <Button mnemonicParsing="false" onAction="#cadastrarVinheta" text="Nova Vinheta" />
+                <Button mnemonicParsing="false" onAction="#cadastrarVinheta" text="Nova Vinheta" /><MenuButton mnemonicParsing="false" text="Outras Funcionalidades">
+  <items>
+    <MenuItem mnemonicParsing="false" onAction="#editarMusica" text="Editar Musica" />
+    <MenuItem mnemonicParsing="false" text="Action 2" />
+  </items>
+</MenuButton>
               </children>
             </HBox>
           </children>

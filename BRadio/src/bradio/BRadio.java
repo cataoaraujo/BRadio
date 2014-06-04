@@ -99,6 +99,10 @@ public class BRadio extends Application {
     public void goToCadastroHorariosPropaganda() {
         replaceSceneContent("CadastroHorariosPropaganda.fxml");
     }
+    
+    public void goToEditarMusica(){
+        replaceSceneContent("EditarMusica.fxml");
+    }
 
     private Parent replaceSceneContent(String fxml) {
         try {

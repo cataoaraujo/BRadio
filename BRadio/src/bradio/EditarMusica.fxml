@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8" fx:controller="bradio.EditarMusicaController">
+<children><VBox layoutX="5.0" layoutY="2.0" prefHeight="395.0" prefWidth="593.0">
+<children>
+<Label layoutX="5.0" layoutY="2.0" maxWidth="1.7976931348623157E308" text="Editar Musicas" VBox.vgrow="ALWAYS">
+<font>
+<Font name="System Bold" size="24.0" />
+</font>
+<VBox.margin>
+<Insets bottom="5.0" />
+</VBox.margin>
+</Label>
+<GridPane layoutX="33.0" layoutY="2.0" prefHeight="100.0" prefWidth="600.0" vgap="10.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="5.0">
+<children>
+<Label maxHeight="-Infinity" maxWidth="1.7976931348623157E308" text="Nome:" GridPane.hgrow="ALWAYS" GridPane.vgrow="ALWAYS" />
+<Label maxHeight="-Infinity" maxWidth="1.7976931348623157E308" text="Artista:" GridPane.rowIndex="1" />
+<Label maxHeight="-Infinity" maxWidth="1.7976931348623157E308" text="Genero:" GridPane.rowIndex="2" />
+<TextField fx:id="artista" maxWidth="1.7976931348623157E308" GridPane.columnIndex="1" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.vgrow="NEVER" />
+<TextField fx:id="titulo" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" GridPane.columnIndex="1" GridPane.hgrow="ALWAYS" GridPane.vgrow="NEVER" />
+<ComboBox fx:id="generos" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" onAction="#pesquisar" prefWidth="150.0" GridPane.columnIndex="1" GridPane.hgrow="ALWAYS" GridPane.rowIndex="2" />
+</children>
+<columnConstraints>
+<ColumnConstraints hgrow="SOMETIMES" maxWidth="294.0" minWidth="10.0" prefWidth="57.0" />
+<ColumnConstraints hgrow="SOMETIMES" maxWidth="543.0" minWidth="10.0" prefWidth="543.0" />
+</columnConstraints>
+<padding>
+<Insets right="10.0" />
+</padding>
+<rowConstraints>
+<RowConstraints maxHeight="101.0" minHeight="0.0" prefHeight="50.0" vgrow="SOMETIMES" />
+<RowConstraints maxHeight="136.0" minHeight="10.0" prefHeight="50.0" vgrow="SOMETIMES" />
+<RowConstraints maxHeight="126.0" minHeight="10.0" prefHeight="50.0" vgrow="SOMETIMES" />
+</rowConstraints>
+<VBox.margin>
+<Insets />
+</VBox.margin>
+</GridPane>
+<HBox prefHeight="32.0" prefWidth="593.0">
+<children>
+<Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#pesquisar" text="Pesquisar" HBox.hgrow="ALWAYS">
+<font>
+<Font name="System Bold" size="12.0" />
+</font>
+</Button>
+</children>
+<VBox.margin>
+<Insets top="10.0" />
+</VBox.margin>
+</HBox>
+<TableView fx:id="tMusicas" editable="true" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="271.0" prefWidth="600.0" VBox.vgrow="ALWAYS">
+<columns>
+<TableColumn fx:id="cNome" onEditCommit="#salvar" prefWidth="150.0" text="Nome" />
+<TableColumn fx:id="cArtista" minWidth="0.0" onEditCommit="#salvar" prefWidth="150.0" text="Artista" />
+<TableColumn fx:id="cGenero" onEditCommit="#salvar" prefWidth="150.0" text="Genero" /><TableColumn fx:id="cAlbum" onEditCommit="#salvar" prefWidth="150.0" text="Album" />
+</columns>
+<VBox.margin>
+<Insets top="2.0" />
+</VBox.margin>
+</TableView>
+<HBox prefHeight="50.0" prefWidth="593.0">
+<children>
+<Button maxHeight="-Infinity" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#salvar" text="Salvar" HBox.hgrow="ALWAYS">
+<HBox.margin>
+<Insets right="5.0" />
+</HBox.margin>
+</Button>
+<Button maxHeight="-Infinity" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#fechar" text="Fechar" HBox.hgrow="ALWAYS">
+<HBox.margin>
+<Insets left="5.0" />
+</HBox.margin>
+</Button>
+</children>
+<padding>
+<Insets top="5.0" />
+</padding>
+<VBox.margin>
+<Insets />
+</VBox.margin>
+</HBox>
+</children>
+</VBox>
+</children></AnchorPane>
