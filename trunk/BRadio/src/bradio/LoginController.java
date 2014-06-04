@@ -122,4 +122,8 @@ public class LoginController implements Initializable {
         }
         return files;
     }
+    
+    public void editarMusica(){
+        BRadio.getInstance().goToEditarMusica();
+    }
 }

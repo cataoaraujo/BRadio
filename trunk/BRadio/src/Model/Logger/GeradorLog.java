@@ -6,6 +6,7 @@
 package Model.Logger;
 
 import java.io.IOException;
+import java.util.logging.ConsoleHandler;
 import java.util.logging.FileHandler;
 import java.util.logging.Handler;
 import java.util.logging.Level;
@@ -33,6 +34,7 @@ public class GeradorLog {
         handlerFull2.setFormatter(new FormatoHTML());
         handlerFull2.setLevel(Level.ALL);
         loggerFull.addHandler(handlerFull2);
+        loggerFull.addHandler(new ConsoleHandler());
     }
 
     private static void init(){
