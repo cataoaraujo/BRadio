@@ -7,6 +7,7 @@ package Model;
 
 import Model.DAO.ConnectionFactory;
 import Model.DAO.PropagandaDAO;
+import bradio.AlertDialog;
 import com.itextpdf.text.Document;
 import com.itextpdf.text.DocumentException;
 import com.itextpdf.text.Element;
@@ -74,7 +75,7 @@ public class RelatorioPropagandas {
                 tabela.addCell(new Phrase(prop.getData().format(DateTimeFormatter.ofLocalizedDate(FormatStyle.SHORT)).toString(), fTabela));
             }
             doc.add(tabela);
-            System.out.println("gerou!");
+            AlertDialog.show("Relatório gerado com sucesso!");
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
@@ -90,11 +91,9 @@ public class RelatorioPropagandas {
     public void relatorioDiasSemanaEntreDatas(LocalDate d1, LocalDate d2) throws IOException {
         PropagandaDAO pd = new PropagandaDAO(ConnectionFactory.getConnection());
         Collection<Propaganda> propagandas = pd.getBetween(d1, d2);
-        System.out.println("GetB: "+propagandas);
-        long diferenca = ChronoUnit.DAYS.between(d1, d2);
         try {
             doc = new Document();
-            os = new FileOutputStream("PropagandasEntreDatas2.pdf");
+            os = new FileOutputStream("PropagandasEntreDatasSimplificado.pdf");
             PdfWriter.getInstance(doc, os);
             doc.open();
 
@@ -106,10 +105,8 @@ public class RelatorioPropagandas {
             doc.add(p);
             PdfPTable tabela = new PdfPTable(4);
             for (Propaganda propaganda : propagandas) {
-                ArrayList<Propaganda> dias = new ArrayList<>(pd.getHorariosPropagandas(propaganda));
-                System.out.println("Dias: "+dias);
+                ArrayList<Propaganda> dias = new ArrayList<>(pd.getHorariosPropaganda(propaganda));
                 ArrayList<LocalTime> horarios = criaHorariosPropaganda(dias);
-                System.out.println("Horarios: "+ horarios);
                 for (LocalTime h : horarios) {
                     ArrayList<Propaganda> datas = new ArrayList<>(pd.getDatasPorHorario(propaganda, h));
                     tabela.addCell(new Phrase(h.toString(), fTabela));
@@ -119,7 +116,7 @@ public class RelatorioPropagandas {
                 }
             }
             doc.add(tabela);
-            System.out.println("gerou!");
+            AlertDialog.show("Relatório gerado com sucesso!");
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
@@ -175,14 +172,11 @@ public class RelatorioPropagandas {
     
     private ArrayList<LocalTime> criaHorariosPropaganda(Collection<Propaganda> p){
         ArrayList<LocalTime> horarios = new ArrayList<>();
-        LocalDate primeiroDia = LocalDate.now();
-        boolean flag = true;
         for (Propaganda propaganda : p) {
             if(!horarios.contains(propaganda.getHora())){
                 horarios.add(propaganda.getHora());
             }
         }
-        //System.out.println("Horarios: " + horarios.toString());
         return horarios;
     }
 
@@ -192,7 +186,7 @@ public class RelatorioPropagandas {
 
         try {
             doc = new Document();
-            os = new FileOutputStream("PropagandasDiasSemana.pdf");
+            os = new FileOutputStream("PropagandasAtivas.pdf");
             PdfWriter.getInstance(doc, os);
             doc.open();
 
@@ -219,7 +213,7 @@ public class RelatorioPropagandas {
                 }
             }
             doc.add(tabela);
-            System.out.println("gerou!");
+            AlertDialog.show("Relatório gerado com sucesso!");
         } catch (Exception e) {
             e.printStackTrace();
         } finally {

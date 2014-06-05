@@ -209,7 +209,7 @@ public class PropagandaDAO extends GenericDAO<Propaganda> {
                 propagandas.add(propaganda);
             }
         } catch (Exception e) {
-
+            GeradorLog.getLoggerFull().severe(e.toString());
         }
         return propagandas;
     }
@@ -233,7 +233,7 @@ public class PropagandaDAO extends GenericDAO<Propaganda> {
                 propagandas.add(propaganda);
             }
         } catch (Exception e) {
-
+            GeradorLog.getLoggerFull().severe(e.toString());
         }
         return propagandas;
     }
@@ -258,7 +258,7 @@ public class PropagandaDAO extends GenericDAO<Propaganda> {
                 propagandas.add(propaganda);
             }
         } catch (Exception e) {
-
+            GeradorLog.getLoggerFull().severe(e.toString());
         }
         return propagandas;
     }
@@ -283,12 +283,12 @@ public class PropagandaDAO extends GenericDAO<Propaganda> {
                 propagandas.add(propaganda);
             }
         } catch (Exception e) {
-
+            GeradorLog.getLoggerFull().severe(e.toString());
         }
         return propagandas;
     }
 
-    public Collection<Propaganda> getHorariosPropagandas(Propaganda p) {
+    public Collection<Propaganda> getHorariosPropaganda(Propaganda p) {
         String sql = "SELECT * "
                 + "FROM tb_diaspropagandas, tb_propaganda"
                 + " WHERE DIP_CODPROPAGANDA = ?  AND PRO_CODIGO = DIP_CODPROPAGANDA"
@@ -307,7 +307,7 @@ public class PropagandaDAO extends GenericDAO<Propaganda> {
                 propagandas.add(propaganda);
             }
         } catch (Exception e) {
-
+            GeradorLog.getLoggerFull().severe(e.toString());
         }
         return propagandas;
     }
