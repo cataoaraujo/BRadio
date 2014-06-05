@@ -44,13 +44,13 @@ public class Player<T> {
         return arquivos;
     }
     
-    /*public File getArquivo() {
+    public File getArquivo() {
         return arquivo;
     }
 
     public void setArquivo(File arquivo) {
         this.arquivo = arquivo;
-    }*/
+    }
 
     public EstadoPlayer getEstado() {
         return estado;
@@ -107,10 +107,9 @@ public class Player<T> {
             @Override
             public void run() {
                 estado = EstadoPlayer.Ocioso;
-                System.out.println("acabou!");
-                /*if (!arquivos.isEmpty()) {
+                if (!arquivos.isEmpty()) {
                     play();
-                }*/
+                }
             }
         });
     }

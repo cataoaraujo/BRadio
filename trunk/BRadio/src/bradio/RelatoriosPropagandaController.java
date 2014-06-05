@@ -37,14 +37,14 @@ public class RelatoriosPropagandaController implements Initializable {
         try {
             RelatorioPropagandas rp = new RelatorioPropagandas();
             if (tipoRelatorio.getSelectionModel().getSelectedItem() != null) {
-                if (tipoRelatorio.getSelectionModel().getSelectedItem().equals(TipoRelatorio.ENTREDATAS)) {
+                if (tipoRelatorio.getSelectionModel().getSelectedItem().equals(TipoRelatorio.ENTREDATAS.getNome())) {
                     if (dataInicial.getValue() != null && dataFinal.getValue() != null) {
                         rp.relatorioEntreDatas(dataInicial.getValue(), dataFinal.getValue());
                     } else {
                         AlertDialog.show("Selecione as datas");
                     }
                 } else {
-                    if (tipoRelatorio.getSelectionModel().getSelectedItem().equals(TipoRelatorio.ENTREDATASSIMPLES)) {
+                    if (tipoRelatorio.getSelectionModel().getSelectedItem().equals(TipoRelatorio.ENTREDATASSIMPLES.getNome())) {
                         if (dataInicial.getValue() != null && dataFinal.getValue() != null) {
                             rp.relatorioDiasSemanaEntreDatas(dataInicial.getValue(), dataFinal.getValue());
                         } else {

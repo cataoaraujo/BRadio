@@ -76,7 +76,6 @@ public class PrincipalController implements Initializable {
         Relogio r = new Relogio(relogio, data);
         MusicaDAO md = new MusicaDAO(ConnectionFactory.getConnection());
         listaMusicas.getItems().addAll(md.getAll());
-        this.next();
         // TODO
         listaPropagandas.setCellFactory(new Callback<ListView<Propaganda>, ListCell<Propaganda>>() {
 
@@ -120,7 +119,7 @@ public class PrincipalController implements Initializable {
             generoSelecionada.setText(m.getGenero());
             artistaSelecionada.setText(m.getArtista());
             albumSelecionada.setText(m.getAlbum());
-            if (e.getClickCount() == 2) {
+            if (e.getClickCount() >= 2) {
                 listaPlaylist.getItems().add(m);
                 playerMusica.addArquivo(m.getArquivo());
             }
@@ -302,25 +301,5 @@ public class PrincipalController implements Initializable {
 
     public void relatorioPropagandas() {
         BRadio.getInstance().goToRelatoriosPropaganda();
-    }
-
-    public void next() {
-        new Thread() {
-            @Override
-            public void run() {
-                System.out.println("Iniciou");
-                while (true) {
-                    //System.out.println(playerMusica.getEstado());
-                    if (EstadoPlayer.Ocioso.equals(playerMusica.getEstado())) {
-                        System.out.println("removeria 1 if");
-                        if (!listaPlaylist.getItems().isEmpty() && !playerMusica.getArquivos().isEmpty()) {
-                            System.out.println("removeria");
-                            //listaPlaylist.getItems().remove(0);
-                            playerMusica.play();
-                        }
-                    }
-                }
-            }
-        }/*.start()*/;
     }
 }
